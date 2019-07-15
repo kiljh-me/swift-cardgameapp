@@ -18,43 +18,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dry-jZ-tL4">
-                                <rect key="frame" x="147" y="56" width="121" height="29"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTa-Xo-9QE" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
+                                <rect key="frame" x="20" y="20" width="50" height="65.666666666666657"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="7 cards"/>
-                                    <segment title="5 Cards"/>
-                                </segments>
-                                <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                <connections>
-                                    <action selector="changeSegment:" destination="BYZ-38-t0r" eventType="valueChanged" id="wHL-oC-fPq"/>
-                                </connections>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DEn-6K-Qcy">
-                                <rect key="frame" x="147" y="92" width="121" height="29"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gY2-ZJ-C3D" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
+                                <rect key="frame" x="75" y="20" width="50" height="65.666666666666657"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="2명"/>
-                                    <segment title="3명"/>
-                                    <segment title="4명"/>
-                                </segments>
-                                <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="changeSegment:" destination="BYZ-38-t0r" eventType="valueChanged" id="E79-AN-Ca2"/>
-                                </connections>
-                            </segmentedControl>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZs-4B-uLC" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
+                                <rect key="frame" x="130" y="20" width="50" height="65.666666666666657"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cNT-jC-tC1" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
+                                <rect key="frame" x="185" y="20" width="50" height="65.666666666666657"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="card-back" translatesAutoresizingMaskIntoConstraints="NO" id="oYQ-NB-mH6">
+                                <rect key="frame" x="358" y="20" width="50" height="65.666666666666657"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <outlet property="menuSegemnt" destination="dry-jZ-tL4" id="t6Z-ic-2EW"/>
-                        <outlet property="playerCountSegent" destination="DEn-6K-Qcy" id="jSh-01-2GO"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="47.826086956521742" y="20.758928571428569"/>
+            <point key="canvasLocation" x="47.826086956521742" y="20.380434782608699"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="card-back" width="107" height="135"/>
+    </resources>
 </document>

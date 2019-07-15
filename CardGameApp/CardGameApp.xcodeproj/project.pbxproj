@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33F4D46822DC547400CB6A0C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4D46722DC547400CB6A0C /* RoundImageView.swift */; };
 		33F825BA22D81987004AFAC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F825B922D81987004AFAC0 /* AppDelegate.swift */; };
 		33F825BC22D81987004AFAC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F825BB22D81987004AFAC0 /* ViewController.swift */; };
 		33F825BF22D81987004AFAC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33F825BD22D81987004AFAC0 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33F4D46722DC547400CB6A0C /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		33F825B622D81987004AFAC0 /* CardGameApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGameApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F825B922D81987004AFAC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33F825BB22D81987004AFAC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			children = (
 				33F825B922D81987004AFAC0 /* AppDelegate.swift */,
 				33F825BB22D81987004AFAC0 /* ViewController.swift */,
+				33F4D46722DC547400CB6A0C /* RoundImageView.swift */,
 				33F825BD22D81987004AFAC0 /* Main.storyboard */,
 				33F825C022D8198C004AFAC0 /* Assets.xcassets */,
 				33F825C222D8198C004AFAC0 /* LaunchScreen.storyboard */,
@@ -179,6 +182,7 @@
 				33F825BC22D81987004AFAC0 /* ViewController.swift in Sources */,
 				33F9EB1A22D8736300A31A8B /* CardDeck.swift in Sources */,
 				33F9EB2222D8736300A31A8B /* Card.swift in Sources */,
+				33F4D46822DC547400CB6A0C /* RoundImageView.swift in Sources */,
 				33F9EB1822D8736300A31A8B /* Player.swift in Sources */,
 				33F825BA22D81987004AFAC0 /* AppDelegate.swift in Sources */,
 				33F9EB1D22D8736300A31A8B /* MenuChecker.swift in Sources */,
