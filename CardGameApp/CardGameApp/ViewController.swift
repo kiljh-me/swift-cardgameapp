@@ -64,8 +64,8 @@ class ViewController: UIViewController {
     }
     
     private func cardGamePlay() {
-        let menu = Menu.init(rawValue: 1)!
-        let userCount = UserCount.init(rawValue: 1)!
+        let menu = Menu.sevenCard
+        let userCount = UserCount.one
         
         do {
             let participant = try cardGame.executeMenu(menu, userCount)
