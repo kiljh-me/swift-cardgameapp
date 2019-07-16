@@ -8,9 +8,7 @@
 
 import Foundation
 
-class Card {
-    // Swift 는 클래스보다 구조체, enum 을 선호한다는 이야기를 들어서 nested enum 으로 구현해봤습니다.
-    
+class Card: ShowableToImage{
     // nested Suit enumeration
     enum Suit: Character, CaseIterable {
         case spades = "♠️", hearts = "♥️", diamonds = "♦️", clubs = "♣️"
@@ -88,7 +86,7 @@ class Card {
         return false
     }
     
-    func getImageName () -> String {
+    private func getImageName() -> String {
         let suitCode = suit.getCode()
         let rankCode = rank.getCode()
         let imageName = suitCode+rankCode+".png"
@@ -106,5 +104,11 @@ extension Card: CustomStringConvertible {
         case 13: return "\(suit.rawValue)K"
         default: return "\(suit.rawValue)\(rank.rawValue)"
         }
+    }
+    
+    func showToImage(_ index: Int, handler: (String) -> ()) {
+        let name = getImageName()
+        
+        handler(name)
     }
 }

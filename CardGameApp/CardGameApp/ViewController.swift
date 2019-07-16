@@ -49,7 +49,7 @@ class ViewController: UIViewController {
     
     private func showCardsPerParticipant(_ menu: Menu, _ participant: Participant) {
         for index in 0..<menu.getCardCount() {
-            participant.showCard(index, handler: { (name, cardImageName) in
+            participant.showToImage(index, handler: { (cardImageName) in
                 let coordinateX = Double(20 + 55 * index)
                 let coordinateY = Double(100)
                 

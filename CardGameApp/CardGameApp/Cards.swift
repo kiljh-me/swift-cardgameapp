@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Cards: CustomStringConvertible {
+struct Cards: CustomStringConvertible, ShowableToImage {
     var cards = [Card]()
     
     var description: String {
@@ -124,7 +124,7 @@ struct Cards: CustomStringConvertible {
         return maxCard
     }
     
-    func getCardImageName (_ index: Int) -> String {
-        return cards[index].getImageName()
+    func showToImage(_ index: Int, handler: (String) -> ()) {
+        cards[index].showToImage(index, handler: handler)
     }
 }

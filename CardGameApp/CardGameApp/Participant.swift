@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Participant {
-    func showCard (_ index: Int, handler: (String, String) -> ())
+protocol Participant: ShowableToImage {
+    
 }
 
