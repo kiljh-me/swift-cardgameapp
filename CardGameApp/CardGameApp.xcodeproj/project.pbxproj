@@ -27,6 +27,7 @@
 		33F9EB2322D8736300A31A8B /* CardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F9EB1622D8736200A31A8B /* CardGame.swift */; };
 		33F9EB2422D8736300A31A8B /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F9EB1722D8736300A31A8B /* InputError.swift */; };
 		33FD4BFE22DD5D30005D847B /* ShowableToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD4BFD22DD5D30005D847B /* ShowableToImage.swift */; };
+		33FD4C2022DDB11E005D847B /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD4C1F22DDB11E005D847B /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		33F9EB1622D8736200A31A8B /* CardGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardGame.swift; sourceTree = "<group>"; };
 		33F9EB1722D8736300A31A8B /* InputError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
 		33FD4BFD22DD5D30005D847B /* ShowableToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowableToImage.swift; sourceTree = "<group>"; };
+		33FD4C1F22DDB11E005D847B /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				33F9EB1122D8736200A31A8B /* Score.swift */,
 				33F9EB0C22D8736200A31A8B /* Cards.swift */,
 				33FD4BFD22DD5D30005D847B /* ShowableToImage.swift */,
+				33FD4C1F22DDB11E005D847B /* CardView.swift */,
 			);
 			path = CardGameApp;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				33F9EB1822D8736300A31A8B /* Player.swift in Sources */,
 				33F825BA22D81987004AFAC0 /* AppDelegate.swift in Sources */,
 				33F9EB1D22D8736300A31A8B /* MenuChecker.swift in Sources */,
+				33FD4C2022DDB11E005D847B /* CardView.swift in Sources */,
 				33F9EB1E22D8736300A31A8B /* Score.swift in Sources */,
 				33F9EB2322D8736300A31A8B /* CardGame.swift in Sources */,
 				33F9EB1F22D8736300A31A8B /* CardError.swift in Sources */,

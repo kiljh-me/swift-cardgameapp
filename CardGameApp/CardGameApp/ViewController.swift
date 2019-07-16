@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     var cardGame = CardGame()
-    var cardViews = [UIView]()
+    @IBOutlet weak var cardView: CardView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     }
     
     private func removeCardViews() {
-        for view in cardViews {
+        for view in cardView.subviews {
             view.removeFromSuperview()
         }
         
@@ -56,9 +56,8 @@ class ViewController: UIViewController {
                 let image: UIImage = UIImage(named: cardImageName)!
                 let imageView = UIImageView(image: image)
                 
-                self.view.addSubview(imageView)
                 imageView.frame = CGRect(x: Double(coordinateX), y: coordinateY, width: 50.0, height: 63.5)
-                cardViews.append(imageView)
+                cardView.addSubview(imageView)
             })
         }
     }
