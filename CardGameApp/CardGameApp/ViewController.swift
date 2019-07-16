@@ -34,31 +34,9 @@ class ViewController: UIViewController {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            removeCardViews()
+            cardView.removeSubViews()
+            cardGame.gameEnd()
             cardGamePlay()
-        }
-    }
-    
-    private func removeCardViews() {
-        for view in cardView.subviews {
-            view.removeFromSuperview()
-        }
-        
-        cardGame.gameEnd()
-    }
-    
-    private func showCardsPerParticipant(_ menu: Menu, _ participant: Participant) {
-        for index in 0..<menu.getCardCount() {
-            participant.showToImage(index, handler: { (cardImageName) in
-                let coordinateX = Double(20 + 55 * index)
-                let coordinateY = Double(100)
-                
-                let image: UIImage = UIImage(named: cardImageName)!
-                let imageView = UIImageView(image: image)
-                
-                imageView.frame = CGRect(x: Double(coordinateX), y: coordinateY, width: 50.0, height: 63.5)
-                cardView.addSubview(imageView)
-            })
         }
     }
     
@@ -68,8 +46,7 @@ class ViewController: UIViewController {
         
         do {
             let participant = try cardGame.executeMenu(menu, userCount)
-            
-            showCardsPerParticipant(menu, participant.0[0])
+            cardView.showCards(menu, participant.0[0])
         }
         catch let error as InputError
         {

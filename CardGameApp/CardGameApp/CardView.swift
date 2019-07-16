@@ -17,5 +17,25 @@ class CardView: UIView {
         // Drawing code
     }
     */
-
+    
+    func removeSubViews() {
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
+    func showCards(_ menu: Menu, _ participant: Participant) {
+        for index in 0..<menu.getCardCount() {
+            participant.showToImage(index, handler: { (cardImageName) in
+                let coordinateX = Double(20 + 55 * index)
+                let coordinateY = Double(100)
+                
+                let image: UIImage = UIImage(named: cardImageName)!
+                let imageView = UIImageView(image: image)
+                
+                imageView.frame = CGRect(x: Double(coordinateX), y: coordinateY, width: 50.0, height: 63.5)
+                self.addSubview(imageView)
+            })
+        }
+    }
 }

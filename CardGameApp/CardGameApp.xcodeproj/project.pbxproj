@@ -88,6 +88,7 @@
 			children = (
 				33F825B922D81987004AFAC0 /* AppDelegate.swift */,
 				33F825BB22D81987004AFAC0 /* ViewController.swift */,
+				33FD4C1F22DDB11E005D847B /* CardView.swift */,
 				33F4D46722DC547400CB6A0C /* RoundImageView.swift */,
 				33F825BD22D81987004AFAC0 /* Main.storyboard */,
 				33F825C022D8198C004AFAC0 /* Assets.xcassets */,
@@ -107,7 +108,6 @@
 				33F9EB1122D8736200A31A8B /* Score.swift */,
 				33F9EB0C22D8736200A31A8B /* Cards.swift */,
 				33FD4BFD22DD5D30005D847B /* ShowableToImage.swift */,
-				33FD4C1F22DDB11E005D847B /* CardView.swift */,
 			);
 			path = CardGameApp;
 			sourceTree = "<group>";
