@@ -59,7 +59,7 @@ struct Player: Participant {
         return (otherPlayer, otherPlayer.name)
     }
     
-    func showToImage(_ index: Int, handler: (String) -> ()) {
-        cards.showToImage(index, handler: handler)
-    }
+//    func showToImage(_ index: Int, handler: (String) -> ()) {
+//        cards.showToImage(index, handler: handler)
+//    }
 }
