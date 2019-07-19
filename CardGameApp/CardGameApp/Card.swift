@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Card: ShowableToImage{
+class Card: ShowableToImage {
     // nested Suit enumeration
     enum Suit: Character, CaseIterable {
         case spades = "♠️", hearts = "♥️", diamonds = "♦️", clubs = "♣️"
@@ -48,7 +48,7 @@ class Card: ShowableToImage{
     }
     
     // Card properties and methods
-    private let rank: Rank, suit: Suit, back = true
+    private let rank: Rank, suit: Suit
     
     init(rank: Rank, suit: Suit) {
         self.rank = rank
@@ -106,7 +106,7 @@ extension Card: CustomStringConvertible {
         }
     }
     
-    func showToImage(_ index: Int, handler: (String) -> ()) {
+    func showToImage(_ column: Int, _ row: Int, handler: (String) -> ()) {
         let name = getImageName()
         
         handler(name)
