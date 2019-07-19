@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Cards: CustomStringConvertible, ShowableToImage {
+struct Cards: CustomStringConvertible, ShowableToCards {
     var cards = [Card]()
     
     var description: String {
@@ -124,7 +124,16 @@ struct Cards: CustomStringConvertible, ShowableToImage {
         return maxCard
     }
     
-    func showToImage(_ index: Int, handler: (String) -> ()) {
-        cards[index].showToImage(index, handler: handler)
+    func showToCards(_ column: Int, _ row: Int, handler: (String) -> ()) {
+        if row < cards.count-1 {
+            handler("card-back.png")
+            return
+        }
+        
+        cards[row].showToImage(column, row, handler: handler)
+    }
+    
+    func getCardsCount() -> Int {
+        return cards.count
     }
 }

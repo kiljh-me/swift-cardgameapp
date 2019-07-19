@@ -8,14 +8,10 @@
 
 import Foundation
 
-struct CardStack: ShowableToImage {
+struct CardStack: ShowableToCards {
     private var cards = Cards()
     private var cardDeck: CardDeck
-    
-    func showToImage(_ index: Int, handler: (String) -> ()) {
-        cards.showToImage(index, handler: handler)
-    }
-    
+
     init(layer: Int, cardDeck: CardDeck) {
         self.cardDeck = cardDeck
         
@@ -26,5 +22,13 @@ struct CardStack: ShowableToImage {
                 return
             }
         }
+    }
+    
+    func showToCards(_ column: Int, _ row: Int, handler: (String) -> ()) {
+        cards.showToCards(column, row, handler: handler)
+    }
+    
+    func getCardsCount() -> Int {
+        return cards.getCardsCount()
     }
 }
