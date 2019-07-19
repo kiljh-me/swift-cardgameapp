@@ -8,6 +8,16 @@
 
 import Foundation
 
+protocol ShowableToCardStack {
+    func getCardStackRow(column: Int) -> Int
+    func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ())
+}
+
+protocol ShowableToCards {
+    func getCardsCount() -> Int
+    func showToCards(_ column: Int, _ row: Int, handler: (String) -> ())
+}
+
 protocol ShowableToImage {
-    func showToImage(_ index: Int, handler: (String) -> ())
+    func showToImage(_ column: Int, _ row: Int, handler: (String) -> ())
 }
