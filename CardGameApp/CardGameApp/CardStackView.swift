@@ -31,7 +31,7 @@ class CardStackView: UIView {
             for row in 0..<maxRow {
                 cardStack.showToCardStack(index, row, handler: { (cardImageName) in
                     let coordinateX = Double(20 + 55 * index)
-                    let coordinateY = Double(100 + 20 * row)
+                    let coordinateY = Double(20 * row)
                     
                     let image: UIImage = UIImage(named: cardImageName)!
                     let imageView = UIImageView(image: image)
