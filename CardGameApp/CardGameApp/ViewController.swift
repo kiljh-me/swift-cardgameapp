@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     var cardGame = CardGame()
-    @IBOutlet weak var cardView: CardView!
+    
+    @IBOutlet weak var cardStackView: CardStackView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -34,19 +35,17 @@ class ViewController: UIViewController {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            cardView.removeSubViews()
-            cardGame.gameEnd()
+            cardStackView.removeSubViews()
+            cardGame.end()
             cardGamePlay()
         }
     }
     
     private func cardGamePlay() {
-        let menu = Menu.sevenCard
-        let userCount = UserCount.one
-        
         do {
-            let participant = try cardGame.executeMenu(menu, userCount)
-            cardView.showCards(menu, participant.0[0])
+            cardGame.start()
+            cardStackView.showCardStack(cardGame as! ShowableToCardStack)
+            
         }
         catch let error as InputError
         {

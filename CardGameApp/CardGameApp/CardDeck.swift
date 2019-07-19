@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CardDeck {
+class CardDeck {
     private var cards = [Card]()
     
     init() {
@@ -17,14 +17,14 @@ struct CardDeck {
     }
     
     /// 모든 카드 초기화
-    private mutating func initCards () {
+    private func initCards () {
         for suit in Card.Suit.allCases {
             initSuitCards(suit: suit)
         }
     }
     
     /// 모양 별 카드 초기화
-    private mutating func initSuitCards (suit: Card.Suit) {
+    private func initSuitCards (suit: Card.Suit) {
         for rank in Card.Rank.allCases {
             cards.append(Card(rank: rank, suit: suit))
         }
@@ -36,12 +36,12 @@ struct CardDeck {
     }
     
     /// 전체 카드를 랜덤하게 섞는다.
-    mutating func shuffle () {
+    func shuffle () {
         cards = cards.shuffled()
     }
     
     /// 카드 인스턴스 중에 하나를 반환하고 목록에서 삭제한다.
-    mutating func removeOne () throws -> Card {
+    func removeOne () throws -> Card {
         guard let firstCard = cards.first else {
             throw CardError.notExistCard
         }
@@ -52,7 +52,7 @@ struct CardDeck {
     }
     
     /// 처음처럼 모든 카드를 다시 채워넣는다.
-    mutating func reset () {
+    func reset () {
         cards.removeAll()
         initCards()
     }
