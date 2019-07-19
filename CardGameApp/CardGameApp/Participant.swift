@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Participant: ShowableToImage {
+protocol Participant {
     
 }
 
