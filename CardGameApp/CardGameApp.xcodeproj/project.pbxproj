@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		33F4D46822DC547400CB6A0C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4D46722DC547400CB6A0C /* RoundImageView.swift */; };
+		33F7544322E16D29001C1799 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F7544222E16D29001C1799 /* CardStack.swift */; };
 		33F825BA22D81987004AFAC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F825B922D81987004AFAC0 /* AppDelegate.swift */; };
 		33F825BC22D81987004AFAC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F825BB22D81987004AFAC0 /* ViewController.swift */; };
 		33F825BF22D81987004AFAC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33F825BD22D81987004AFAC0 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		33F4D46722DC547400CB6A0C /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
+		33F7544222E16D29001C1799 /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
 		33F825B622D81987004AFAC0 /* CardGameApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGameApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F825B922D81987004AFAC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33F825BB22D81987004AFAC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				33F9EB1122D8736200A31A8B /* Score.swift */,
 				33F9EB0C22D8736200A31A8B /* Cards.swift */,
 				33FD4BFD22DD5D30005D847B /* ShowableToImage.swift */,
+				33F7544222E16D29001C1799 /* CardStack.swift */,
 			);
 			path = CardGameApp;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				33F9EB2022D8736300A31A8B /* Dealer.swift in Sources */,
 				33F9EB1922D8736300A31A8B /* Cards.swift in Sources */,
 				33F9EB2422D8736300A31A8B /* InputError.swift in Sources */,
+				33F7544322E16D29001C1799 /* CardStack.swift in Sources */,
 				33F9EB2122D8736300A31A8B /* Participant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
