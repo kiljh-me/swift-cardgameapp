@@ -48,7 +48,7 @@ class Card: ShowableToImage{
     }
     
     // Card properties and methods
-    private let rank: Rank, suit: Suit
+    private let rank: Rank, suit: Suit, back = true
     
     init(rank: Rank, suit: Suit) {
         self.rank = rank
