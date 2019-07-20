@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     var cardGame = CardGame()
     
     @IBOutlet weak var cardStackView: CardStackView!
+    @IBOutlet weak var cardDeckView: CardDeckView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -25,6 +26,7 @@ class ViewController: UIViewController {
         self.becomeFirstResponder()
         
         cardGamePlay()
+        cardDeckView.showCardBack()
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -36,9 +38,15 @@ class ViewController: UIViewController {
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             cardStackView.removeSubViews()
+            cardDeckView.removeSubViews()
             cardGame.end()
             cardGamePlay()
+            cardDeckView.showCardBack()
         }
+    }
+    
+    @IBAction func cardDeckButton(_ sender: Any) {
+        cardDeckView.showCard(cardGame as! ShowableToCardDeck)
     }
     
     private func cardGamePlay() {

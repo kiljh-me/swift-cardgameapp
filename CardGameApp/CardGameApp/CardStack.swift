@@ -24,8 +24,8 @@ struct CardStack: ShowableToCards {
         }
     }
     
-    func showToCards(_ column: Int, _ row: Int, handler: (String) -> ()) {
-        cards.showToCards(column, row, handler: handler)
+    func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
+        cards.showToCardStack(column, row, handler: handler)
     }
     
     func getCardsCount() -> Int {

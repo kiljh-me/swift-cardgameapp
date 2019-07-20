@@ -124,13 +124,13 @@ struct Cards: CustomStringConvertible, ShowableToCards {
         return maxCard
     }
     
-    func showToCards(_ column: Int, _ row: Int, handler: (String) -> ()) {
+    func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
         if row < cards.count-1 {
             handler("card-back.png")
             return
         }
         
-        cards[row].showToImage(column, row, handler: handler)
+        cards[row].showToImage(handler: handler)
     }
     
     func getCardsCount() -> Int {

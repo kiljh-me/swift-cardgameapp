@@ -106,7 +106,7 @@ extension Card: CustomStringConvertible {
         }
     }
     
-    func showToImage(_ column: Int, _ row: Int, handler: (String) -> ()) {
+    func showToImage(handler: (String) -> ()) {
         let name = getImageName()
         
         handler(name)

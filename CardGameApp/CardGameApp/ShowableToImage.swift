@@ -15,9 +15,13 @@ protocol ShowableToCardStack {
 
 protocol ShowableToCards {
     func getCardsCount() -> Int
-    func showToCards(_ column: Int, _ row: Int, handler: (String) -> ())
+    func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ())
 }
 
 protocol ShowableToImage {
-    func showToImage(_ column: Int, _ row: Int, handler: (String) -> ())
+    func showToImage(handler: (String) -> ())
+}
+
+protocol ShowableToCardDeck {
+    func showToOneCard(handler: (String) -> ()) throws
 }

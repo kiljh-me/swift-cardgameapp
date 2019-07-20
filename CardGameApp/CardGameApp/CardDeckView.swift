@@ -9,7 +9,8 @@
 import UIKit
 
 class CardDeckView: UIView {
-
+    var backCardView = UIView()
+    var refreshView = UIView()
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -18,4 +19,43 @@ class CardDeckView: UIView {
     }
     */
 
+    func showCardBack() {
+        let image: UIImage = UIImage(named: "card-back.png")!
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 350.0, y: 20.0, width: 50.0, height: 63.5)
+        self.addSubview(imageView)
+        backCardView = imageView
+    }
+    
+    func removeSubViews() {
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
+    func showCard(_ card: ShowableToCardDeck) {
+        do {
+            try card.showToOneCard(handler: { (cardImageName) in
+                let coordinateX = Double(295)
+                let coordinateY = Double(20)
+                
+                let image: UIImage = UIImage(named: cardImageName)!
+                let imageView = UIImageView(image: image)
+                
+                imageView.frame = CGRect(x: Double(coordinateX), y: coordinateY, width: 50.0, height: 63.5)
+                self.addSubview(imageView)
+            })
+        } catch {
+            backCardView.removeFromSuperview()
+            showRefresh()
+        }
+    }
+    
+    private func showRefresh() {
+        let image: UIImage = UIImage(named: "refresh.png")!
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 363.0, y: 36.0, width: 30.0, height: 30.0)
+        self.addSubview(imageView)
+        refreshView = imageView
+    }
 }

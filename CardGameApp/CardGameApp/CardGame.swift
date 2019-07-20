@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CardGame: ShowableToCardStack {
+struct CardGame: ShowableToCardStack, ShowableToCardDeck {
     private var cardDeck =  CardDeck()
     private var cardStack = [CardStack]()
     
@@ -26,10 +26,16 @@ struct CardGame: ShowableToCardStack {
     }
     
     func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
-        cardStack[column].showToCards(column, row, handler: handler)
+        cardStack[column].showToCardStack(column, row, handler: handler)
     }
     
     func getCardStackRow(column: Int) -> Int {
         return cardStack[column].getCardsCount()
+    }
+    
+    func showToOneCard(handler: (String) -> ()) throws {
+        let card = try cardDeck.removeOne()
+        
+        card.showToImage(handler: handler)
     }
 }
