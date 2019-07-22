@@ -23,8 +23,4 @@ struct Dealer: Participant {
     init(){
         
     }
-    
-//    func showToImage(_ index: Int, handler: (String) -> ()) {
-//        cards.showToImage(index, handler: handler)
-//    }
 }
