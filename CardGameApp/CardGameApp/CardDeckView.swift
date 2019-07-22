@@ -53,7 +53,7 @@ class CardDeckView: UIView {
     private func showRefresh() {
         let image: UIImage = UIImage(named: "refresh.png") ?? UIImage()
         refreshView = UIImageView(image: image)
-        refreshView.frame = CGRect(x: 363.0, y: 36.0, width: 30.0, height: 30.0)
+        refreshView.frame = CGRect(x: 360.0, y: 36.0, width: 30.0, height: 30.0)
         self.addSubview(refreshView)
     }
 }

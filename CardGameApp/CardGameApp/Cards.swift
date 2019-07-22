@@ -125,11 +125,6 @@ struct Cards: CustomStringConvertible, ShowableToCards {
     }
     
     func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
-        if row < cards.count-1 {
-            handler("card-back.png")
-            return
-        }
-        
         cards[row].showToImage(handler: handler)
     }
     

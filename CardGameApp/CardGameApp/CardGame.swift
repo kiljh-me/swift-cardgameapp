@@ -36,6 +36,7 @@ struct CardGame: ShowableToCardStack, ShowableToCardDeck {
     func showToOneCard(handler: (String) -> ()) throws {
         let card = try cardDeck.removeOne()
         
+        card.flipCard()
         card.showToImage(handler: handler)
     }
 }

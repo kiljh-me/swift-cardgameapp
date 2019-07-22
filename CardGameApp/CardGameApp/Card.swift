@@ -48,11 +48,12 @@ class Card: ShowableToImage {
     }
     
     // Card properties and methods
-    private let rank: Rank, suit: Suit
+    private var rank: Rank, suit: Suit, back: Bool
     
     init(rank: Rank, suit: Suit) {
         self.rank = rank
         self.suit = suit
+        self.back = true
     }
     
     func isEqualToRank (_ card: Card) -> Bool {
@@ -93,6 +94,10 @@ class Card: ShowableToImage {
         
         return imageName
     }
+    
+    func flipCard() {
+        back = !back
+    }
 }
 
 extension Card: CustomStringConvertible {
@@ -107,8 +112,12 @@ extension Card: CustomStringConvertible {
     }
     
     func showToImage(handler: (String) -> ()) {
-        let name = getImageName()
+        if back {
+            handler("card-back.png")
+            return
+        }
         
+        let name = getImageName()
         handler(name)
     }
 }

@@ -26,7 +26,6 @@ class ViewController: UIViewController {
         self.becomeFirstResponder()
         
         cardGamePlay()
-        cardDeckView.showCardBack()
     }
     
     override var canBecomeFirstResponder: Bool {

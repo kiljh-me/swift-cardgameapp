@@ -22,6 +22,8 @@ struct CardStack: ShowableToCards {
                 return
             }
         }
+        
+        cards.cards.last?.flipCard()
     }
     
     func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
