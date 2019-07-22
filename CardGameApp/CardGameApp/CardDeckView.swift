@@ -38,7 +38,7 @@ class CardDeckView: UIView {
                 let coordinateX = Double(295)
                 let coordinateY = Double(20)
                 
-                let image: UIImage = UIImage(named: cardImageName)!
+                let image: UIImage = UIImage(named: cardImageName) ?? UIImage()
                 let imageView = UIImageView(image: image)
                 
                 imageView.frame = CGRect(x: Double(coordinateX), y: coordinateY, width: 50.0, height: 63.5)
