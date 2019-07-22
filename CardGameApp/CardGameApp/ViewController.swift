@@ -37,11 +37,8 @@ class ViewController: UIViewController {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            cardStackView.removeSubViews()
-            cardDeckView.removeSubViews()
-            cardGame.end()
+            cardGameEnd()
             cardGamePlay()
-            cardDeckView.showCardBack()
         }
     }
     
@@ -49,11 +46,17 @@ class ViewController: UIViewController {
         cardDeckView.showCard(cardGame as! ShowableToCardDeck)
     }
     
+    private func cardGameEnd() {
+        cardStackView.removeSubViews()
+        cardDeckView.removeSubViews()
+        cardGame.end()
+    }
+    
     private func cardGamePlay() {
         do {
             cardGame.start()
             cardStackView.showCardStack(cardGame as! ShowableToCardStack)
-            
+            cardDeckView.showCardBack()
         }
         catch let error as InputError
         {
