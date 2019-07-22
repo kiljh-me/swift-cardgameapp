@@ -95,7 +95,7 @@ class Card: ShowableToImage {
         return imageName
     }
     
-    func flipCard() {
+    func flip() {
         back = !back
     }
 }
