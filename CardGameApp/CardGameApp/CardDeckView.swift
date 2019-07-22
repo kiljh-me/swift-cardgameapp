@@ -20,7 +20,7 @@ class CardDeckView: UIView {
     */
 
     func showCardBack() {
-        let image: UIImage = UIImage(named: "card-back.png")!
+        let image: UIImage = UIImage(named: "card-back.png") ?? UIImage()
         backCardView = UIImageView(image: image)
         backCardView.frame = CGRect(x: 350.0, y: 20.0, width: 50.0, height: 63.5)
         self.addSubview(backCardView)
@@ -51,7 +51,7 @@ class CardDeckView: UIView {
     }
     
     private func showRefresh() {
-        let image: UIImage = UIImage(named: "refresh.png")!
+        let image: UIImage = UIImage(named: "refresh.png") ?? UIImage()
         refreshView = UIImageView(image: image)
         refreshView.frame = CGRect(x: 363.0, y: 36.0, width: 30.0, height: 30.0)
         self.addSubview(refreshView)

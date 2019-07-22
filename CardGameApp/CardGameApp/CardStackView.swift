@@ -32,7 +32,7 @@ class CardStackView: UIView {
                     let coordinateX = Double(20 + 55 * index)
                     let coordinateY = Double(20 * row)
                     
-                    let image: UIImage = UIImage(named: cardImageName)!
+                    let image: UIImage = UIImage(named: cardImageName) ?? UIImage()
                     let imageView = UIImageView(image: image)
                     
                     imageView.frame = CGRect(x: Double(coordinateX), y: coordinateY, width: 50.0, height: 63.5)
