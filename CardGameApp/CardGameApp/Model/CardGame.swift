@@ -11,7 +11,7 @@ import Foundation
 struct CardGame: ShowableToCardStack, ShowableToCardDeck {
     private var cardDeck =  CardDeck()
     private var cardStack = [CardStack]()
-    
+
     /// 게임 종료
     mutating func end() {
         cardStack.removeAll()
@@ -34,7 +34,7 @@ struct CardGame: ShowableToCardStack, ShowableToCardDeck {
     }
     
     func showToOneCard(handler: (String) -> ()) throws {
-        let card = try cardDeck.removeOne()
+        let card = try cardDeck.openOne()
         
         card.flip()
         card.showToImage(handler: handler)

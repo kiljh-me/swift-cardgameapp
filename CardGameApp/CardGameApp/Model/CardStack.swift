@@ -9,7 +9,7 @@
 import Foundation
 
 struct CardStack: ShowableToCards {
-    private var cards = Cards()
+    private var cards = [Card]()
     private var cardDeck: CardDeck
 
     init(layer: Int, cardDeck: CardDeck) {
@@ -17,20 +17,20 @@ struct CardStack: ShowableToCards {
         
         for _ in 0..<layer {
             do {
-                cards.cards.append(try self.cardDeck.removeOne())
+                cards.append(try self.cardDeck.removeOne())
             } catch {
                 return
             }
         }
         
-        cards.cards.last?.flip()
+        cards.last?.flip()
     }
     
     func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
-        cards.showToCardStack(column, row, handler: handler)
+        cards[row].showToImage(handler: handler)
     }
     
     func getCardsCount() -> Int {
-        return cards.getCardsCount()
+        return cards.count
     }
 }

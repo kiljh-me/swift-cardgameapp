@@ -10,6 +10,7 @@ import Foundation
 
 class CardDeck {
     private var cards = [Card]()
+    private var openCards = [Card]()
     
     init() {
         initCards()
@@ -49,6 +50,24 @@ class CardDeck {
         cards.removeFirst()
         
         return firstCard
+    }
+    
+    /// 카드 중에 하나를 오픈한다.
+    func openOne() throws -> Card {
+        guard let firstCard = cards.first else {
+            throw CardError.notExistCard
+        }
+        
+        cards.removeFirst()
+        openCards.append(firstCard)
+        
+        return firstCard
+    }
+    
+    /// 오픈한 카드를 다시 뒤짚는다.
+    func refreshCardDeck() {
+        cards = openCards
+        openCards.removeAll()
     }
     
     /// 처음처럼 모든 카드를 다시 채워넣는다.

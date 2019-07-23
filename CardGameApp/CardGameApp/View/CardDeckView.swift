@@ -46,6 +46,13 @@ class CardDeckView: UIView {
             })
         } catch {
             backCardView.removeFromSuperview()
+            
+            if !self.refreshView.isDescendant(of: self) {
+                showRefresh()
+            } else {
+                
+            }
+            
             showRefresh()
         }
     }
