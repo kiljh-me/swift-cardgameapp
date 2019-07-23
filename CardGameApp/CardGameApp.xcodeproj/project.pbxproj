@@ -86,9 +86,17 @@
 			children = (
 				33FD4BFD22DD5D30005D847B /* CardStackRelated.swift */,
 				33B4C95122E6A3A7002BB41D /* CardDeckRelated.swift */,
-				33F9EB1222D8736200A31A8B /* CardError.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		33B4C95722E6D4FF002BB41D /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				33F9EB1222D8736200A31A8B /* CardError.swift */,
+				33B4C95522E6D39A002BB41D /* ImageFileName.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		33F825AD22D81987004AFAC0 = {
@@ -115,7 +123,7 @@
 				33B4C94F22E6A0D9002BB41D /* Model */,
 				33B4C94E22E6A0A0002BB41D /* View */,
 				33B4C95022E6A141002BB41D /* Protocol */,
-				33B4C95522E6D39A002BB41D /* ImageFileName.swift */,
+				33B4C95722E6D4FF002BB41D /* Enum */,
 				33F825BD22D81987004AFAC0 /* Main.storyboard */,
 				33F825C022D8198C004AFAC0 /* Assets.xcassets */,
 				33F825C222D8198C004AFAC0 /* LaunchScreen.storyboard */,
