@@ -18,14 +18,14 @@ class CardDeck {
     }
     
     /// 모든 카드 초기화
-    private func initCards () {
+    private func initCards() {
         for suit in Card.Suit.allCases {
             initSuitCards(suit: suit)
         }
     }
     
     /// 모양 별 카드 초기화
-    private func initSuitCards (suit: Card.Suit) {
+    private func initSuitCards(suit: Card.Suit) {
         for rank in Card.Rank.allCases {
             cards.append(Card(rank: rank, suit: suit))
         }
@@ -37,12 +37,12 @@ class CardDeck {
     }
     
     /// 전체 카드를 랜덤하게 섞는다.
-    func shuffle () {
+    func shuffle() {
         cards = cards.shuffled()
     }
     
     /// 카드 인스턴스 중에 하나를 반환하고 목록에서 삭제한다.
-    func removeOne () throws -> Card {
+    func removeOne() throws -> Card {
         guard let firstCard = cards.first else {
             throw CardError.notExistCard
         }
@@ -76,8 +76,13 @@ class CardDeck {
     }
     
     /// 처음처럼 모든 카드를 다시 채워넣는다.
-    func reset () {
+    func reset() {
         cards.removeAll()
         initCards()
+    }
+    
+    /// 앞면인 카드 중에 가장 앞에 있는 카드가 포인트이면 포인트 카드스텍으로 이동
+    func moveIfPoint() {
+        
     }
 }

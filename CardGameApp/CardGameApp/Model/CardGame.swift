@@ -11,6 +11,7 @@ import Foundation
 struct CardGame: ShowableToCardStack, ShowableToCardDeck {
     private var cardDeck =  CardDeck()
     private var cardStack = [CardStack]()
+    private var pointStack = [CardStack]()
 
     /// 게임 종료
     mutating func end() {

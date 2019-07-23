@@ -13,7 +13,7 @@ class Card: ShowableToImage {
     enum Suit: Character, CaseIterable {
         case spades = "♠️", hearts = "♥️", diamonds = "♦️", clubs = "♣️"
     
-        func getPoint () -> Int {
+        func getPoint() -> Int {
             switch self {
             case .clubs: return 4
             case .diamonds: return 3
@@ -22,7 +22,7 @@ class Card: ShowableToImage {
             }
         }
         
-        func getCode () -> String {
+        func getCode() -> String {
             switch self {
             case .clubs: return "c"
             case .diamonds: return "d"
@@ -36,7 +36,7 @@ class Card: ShowableToImage {
     enum Rank: Int, CaseIterable {
         case ace = 1, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king
         
-        func getCode () -> String {
+        func getCode() -> String {
             switch self {
             case .ace: return "A"
             case .jack: return "J"
@@ -56,11 +56,11 @@ class Card: ShowableToImage {
         self.back = true
     }
     
-    func isEqualToRank (_ card: Card) -> Bool {
+    func isEqualToRank(_ card: Card) -> Bool {
         return rank == card.rank
     }
     
-    func isNextRankThan (_ card: Card) -> Bool {
+    func isNextRankThan(_ card: Card) -> Bool {
         if rank == .two && card.rank == Rank.ace {
             return true
         }
@@ -68,7 +68,7 @@ class Card: ShowableToImage {
         return rank == Rank(rawValue: card.rank.rawValue + 1)
     }
     
-    func isHigherThan (_ card: Card) -> Bool {
+    func isHigherThan(_ card: Card) -> Bool {
         let rankPoint = rank.rawValue == 1 ? 13 : rank.rawValue
         let cardRankPoint = card.rank.rawValue == 1 ? 13 : card.rank.rawValue
         
