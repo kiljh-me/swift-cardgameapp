@@ -61,7 +61,7 @@ class Card: ShowableToImage {
     }
     
     func isNextRankThan(_ card: Card) -> Bool {
-        return rank == Rank(rawValue: card.rank.rawValue + 1)
+        return suit == card.suit && rank == Rank(rawValue: card.rank.rawValue + 1)
     }
     
     func isHigherThan(_ card: Card) -> Bool {
@@ -93,6 +93,24 @@ class Card: ShowableToImage {
     
     func flip() {
         back = !back
+    }
+    
+    func isPoint(_ pointStacks: [PointStack]) -> Bool {
+        if rank == Rank.ace {
+            return true
+        }
+        
+        for cardStack in pointStacks {
+            if isNextRankThan(cardStack.getLastCard() ?? self) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func isEqualToSuit(_ card: Card) -> Bool {
+        return suit == card.suit
     }
 }
 

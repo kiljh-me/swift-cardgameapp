@@ -11,11 +11,13 @@ import UIKit
 class CardDeckView: UIView {
     var backCardView = UIView()
     var refreshView = UIView()
+    var cardDeck = [UIImageView]()
+    
     
     func showCardBack() {
         let image: UIImage = UIImage(named: ImageFileName.cardBack.rawValue) ?? UIImage()
         backCardView = UIImageView(image: image)
-        backCardView.frame = CGRect(x: 55, y: 20, width: 50, height: 63)
+        backCardView.frame = CGRect(x: 350, y: 20, width: 50, height: 63)
         self.addSubview(backCardView)
     }
     
@@ -25,18 +27,37 @@ class CardDeckView: UIView {
         }
     }
     
+    func removeCardDeck() {
+        for view in cardDeck {
+            view.removeFromSuperview()
+        }
+    }
+    
     func showCard(_ card: ShowableToCardDeck) {
         do {
+            var imageView = UIImageView()
+            
             try card.showToOneCard(handler: { (cardImageName) in
-                let coordinateX = Double(0)
+                let coordinateX = Double(295)
                 let coordinateY = Double(20)
                 
                 let image: UIImage = UIImage(named: cardImageName) ?? UIImage()
-                let imageView = UIImageView(image: image)
+                imageView = UIImageView(image: image)
                 
                 imageView.frame = CGRect(x: coordinateX, y: coordinateY, width: 50, height: 62)
                 self.addSubview(imageView)
             })
+            
+            let deck = card
+            let point = deck.moveToPoint() - 1
+            if point >= 0 {
+                UIImageView.animate(withDuration: 0.15, animations: {
+                                        imageView.frame = CGRect(x: 20 + 55 * point, y: 20, width: 50, height: 63)
+                                    })
+            } else {
+                cardDeck.append(imageView)
+            }
+            
         } catch {
             backCardView.removeFromSuperview()
             
@@ -44,7 +65,8 @@ class CardDeckView: UIView {
                 showRefresh()
             } else {
                 card.refreshCardDeck()
-                removeSubViews()
+                removeCardDeck()
+                removeRefresh()
                 showCardBack()
             }
         }
@@ -53,7 +75,12 @@ class CardDeckView: UIView {
     private func showRefresh() {
         let image: UIImage = UIImage(named: ImageFileName.refresh.rawValue) ?? UIImage()
         refreshView = UIImageView(image: image)
-        refreshView.frame = CGRect(x: 56, y: 36, width: 30, height: 30)
+        refreshView.frame = CGRect(x: 366, y: 36, width: 30, height: 30)
         self.addSubview(refreshView)
+    }
+    
+    private func removeRefresh() {
+        backCardView.removeFromSuperview()
+        refreshView.removeFromSuperview()
     }
 }

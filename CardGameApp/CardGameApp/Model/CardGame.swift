@@ -8,19 +8,20 @@
 
 import Foundation
 
-struct CardGame: ShowableToCardStack, ShowableToCardDeck {
+class CardGame: ShowableToCardStack, ShowableToCardDeck {
     private var cardDeck =  CardDeck()
     private var cardStack = [CardStack]()
-    private var pointStack = [CardStack]()
+    private var pointStack = [PointStack]()
 
     /// 게임 종료
-    mutating func end() {
-        cardStack.removeAll()
+    func end() {
         cardDeck = CardDeck()
+        cardStack.removeAll()
+        pointStack.removeAll()
     }
     
     /// 게임 시작
-    mutating func start() {
+    func start() {
         for index in 1...7 {
             cardStack.append(CardStack(layer: index, cardDeck: cardDeck))
         }
@@ -43,5 +44,30 @@ struct CardGame: ShowableToCardStack, ShowableToCardDeck {
     
     func refreshCardDeck() {
         cardDeck.refresh()
+    }
+    
+    func moveToPoint() -> Int {
+        guard let card = cardDeck.getOpenCard() else {
+            return 0
+        }
+        
+        if card.isPoint(pointStack) {
+            cardDeck.removeOpenCard()
+            
+            var sameSuitCardStack = pointStack.filter { (stack) -> Bool in
+                return stack.getLastCard()?.isEqualToSuit(card) ?? false
+            }
+            
+            if sameSuitCardStack.count > 0 {
+                sameSuitCardStack[0].appandToLast(card)
+            } else {
+                pointStack.append(PointStack(card))
+            }
+            
+            dump(pointStack)
+            return pointStack.count
+        }
+        
+        return 0
     }
 }

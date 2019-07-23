@@ -81,8 +81,13 @@ class CardDeck {
         initCards()
     }
     
-    /// 앞면인 카드 중에 가장 앞에 있는 카드가 포인트이면 포인트 카드스텍으로 이동
-    func moveIfPoint() {
-        
+    /// 오픈한 카드 중 가장 위에 있는 카드를 리턴한다.
+    func getOpenCard() -> Card? {
+        return openCards.last
+    }
+    
+    /// 오픈한 가장 위에 카드 제거
+    func removeOpenCard() {
+        openCards.removeLast()
     }
 }
