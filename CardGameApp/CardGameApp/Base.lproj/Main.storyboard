@@ -18,21 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTa-Xo-9QE" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
-                                <rect key="frame" x="20" y="20" width="50" height="65.666666666666657"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lL5-RC-3A7" customClass="PointStackView" customModule="CardGameApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="295" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gY2-ZJ-C3D" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
-                                <rect key="frame" x="75" y="20" width="50" height="65.666666666666657"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZs-4B-uLC" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
-                                <rect key="frame" x="130" y="20" width="50" height="65.666666666666657"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cNT-jC-tC1" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
-                                <rect key="frame" x="185" y="20" width="50" height="65.666666666666657"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTa-Xo-9QE" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="20" width="50" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gY2-ZJ-C3D" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
+                                        <rect key="frame" x="75" y="20" width="50" height="65.666666666666657"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZs-4B-uLC" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
+                                        <rect key="frame" x="130" y="20" width="50" height="65.666666666666657"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cNT-jC-tC1" customClass="RoundImageView" customModule="CardGameApp" customModuleProvider="target">
+                                        <rect key="frame" x="185" y="20" width="50" height="65.666666666666657"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </view>
+                                </subviews>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sev-ZP-xcs" customClass="CardDeckView" customModule="CardGameApp" customModuleProvider="target">
                                 <rect key="frame" x="295" y="0.0" width="119" height="100"/>

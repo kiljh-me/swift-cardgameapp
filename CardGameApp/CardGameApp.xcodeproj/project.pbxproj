@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		33B4C95222E6A3A7002BB41D /* CardDeckRelated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4C95122E6A3A7002BB41D /* CardDeckRelated.swift */; };
 		33B4C95422E6C979002BB41D /* PointStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4C95322E6C979002BB41D /* PointStackView.swift */; };
+		33B4C95622E6D39A002BB41D /* ImageFileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4C95522E6D39A002BB41D /* ImageFileName.swift */; };
 		33F17D1922E29F4200CF2296 /* CardDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F17D1822E29F4200CF2296 /* CardDeckView.swift */; };
 		33F4D46822DC547400CB6A0C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4D46722DC547400CB6A0C /* RoundImageView.swift */; };
 		33F7544322E16D29001C1799 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F7544222E16D29001C1799 /* CardStack.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		33B4C95122E6A3A7002BB41D /* CardDeckRelated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckRelated.swift; sourceTree = "<group>"; };
 		33B4C95322E6C979002BB41D /* PointStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointStackView.swift; sourceTree = "<group>"; };
+		33B4C95522E6D39A002BB41D /* ImageFileName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileName.swift; sourceTree = "<group>"; };
 		33F17D1822E29F4200CF2296 /* CardDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckView.swift; sourceTree = "<group>"; };
 		33F4D46722DC547400CB6A0C /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		33F7544222E16D29001C1799 /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				33B4C94F22E6A0D9002BB41D /* Model */,
 				33B4C94E22E6A0A0002BB41D /* View */,
 				33B4C95022E6A141002BB41D /* Protocol */,
+				33B4C95522E6D39A002BB41D /* ImageFileName.swift */,
 				33F825BD22D81987004AFAC0 /* Main.storyboard */,
 				33F825C022D8198C004AFAC0 /* Assets.xcassets */,
 				33F825C222D8198C004AFAC0 /* LaunchScreen.storyboard */,
@@ -196,6 +199,7 @@
 				33F17D1922E29F4200CF2296 /* CardDeckView.swift in Sources */,
 				33F825BC22D81987004AFAC0 /* ViewController.swift in Sources */,
 				33F9EB1A22D8736300A31A8B /* CardDeck.swift in Sources */,
+				33B4C95622E6D39A002BB41D /* ImageFileName.swift in Sources */,
 				33F9EB2222D8736300A31A8B /* Card.swift in Sources */,
 				33F4D46822DC547400CB6A0C /* RoundImageView.swift in Sources */,
 				33B4C95222E6A3A7002BB41D /* CardDeckRelated.swift in Sources */,
