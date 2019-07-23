@@ -25,3 +25,5 @@ protocol ShowableToImage {
 protocol ShowableToCardDeck {
     func showToOneCard(handler: (String) -> ()) throws
 }
+
+protocol
