@@ -61,16 +61,12 @@ class Card: ShowableToImage {
     }
     
     func isNextRankThan(_ card: Card) -> Bool {
-        if rank == .two && card.rank == Rank.ace {
-            return true
-        }
-        
         return rank == Rank(rawValue: card.rank.rawValue + 1)
     }
     
     func isHigherThan(_ card: Card) -> Bool {
-        let rankPoint = rank.rawValue == 1 ? 13 : rank.rawValue
-        let cardRankPoint = card.rank.rawValue == 1 ? 13 : card.rank.rawValue
+        let rankPoint = rank.rawValue
+        let cardRankPoint = card.rank.rawValue
         
         if rankPoint > cardRankPoint {
             return true
