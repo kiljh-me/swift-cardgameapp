@@ -65,8 +65,13 @@ class CardDeck {
     }
     
     /// 오픈한 카드를 다시 뒤짚는다.
-    func refreshCardDeck() {
+    func refresh() {
         cards = openCards
+        
+        for card in cards {
+            card.flip()
+        }
+        
         openCards.removeAll()
     }
     

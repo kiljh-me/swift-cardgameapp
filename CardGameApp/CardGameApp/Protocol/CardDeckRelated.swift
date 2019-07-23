@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+protocol ShowableToCardDeck {
+    func showToOneCard(handler: (String) -> ()) throws
+    func refreshCardDeck()
+}

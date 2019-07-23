@@ -50,10 +50,10 @@ class CardDeckView: UIView {
             if !self.refreshView.isDescendant(of: self) {
                 showRefresh()
             } else {
-                
+                card.refreshCardDeck()
+                removeSubViews()
+                showCardBack()
             }
-            
-            showRefresh()
         }
     }
     

@@ -39,4 +39,8 @@ struct CardGame: ShowableToCardStack, ShowableToCardDeck {
         card.flip()
         card.showToImage(handler: handler)
     }
+    
+    func refreshCardDeck() {
+        cardDeck.refresh()
+    }
 }

@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cardDeckButton(_ sender: Any) {
-        cardDeckView.showCard(cardGame as! ShowableToCardDeck)
+        cardDeckView.showCard(cardGame as ShowableToCardDeck)
     }
     
     private func cardGameEnd() {
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     
     private func cardGamePlay() {
         cardGame.start()
-        cardStackView.showCardStack(cardGame as! ShowableToCardStack)
+        cardStackView.showCardStack(cardGame as ShowableToCardStack)
         cardDeckView.showCardBack()
     }
     
@@ -65,4 +65,3 @@ class ViewController: UIViewController {
         print("Touch")
     }
 }
-

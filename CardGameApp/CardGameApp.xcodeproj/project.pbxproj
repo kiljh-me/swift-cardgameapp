@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33B4C95222E6A3A7002BB41D /* CardDeckRelated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4C95122E6A3A7002BB41D /* CardDeckRelated.swift */; };
 		33F17D1922E29F4200CF2296 /* CardDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F17D1822E29F4200CF2296 /* CardDeckView.swift */; };
 		33F4D46822DC547400CB6A0C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4D46722DC547400CB6A0C /* RoundImageView.swift */; };
 		33F7544322E16D29001C1799 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F7544222E16D29001C1799 /* CardStack.swift */; };
@@ -19,11 +20,12 @@
 		33F9EB1F22D8736300A31A8B /* CardError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F9EB1222D8736200A31A8B /* CardError.swift */; };
 		33F9EB2222D8736300A31A8B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F9EB1522D8736200A31A8B /* Card.swift */; };
 		33F9EB2322D8736300A31A8B /* CardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F9EB1622D8736200A31A8B /* CardGame.swift */; };
-		33FD4BFE22DD5D30005D847B /* ShowableToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD4BFD22DD5D30005D847B /* ShowableToImage.swift */; };
+		33FD4BFE22DD5D30005D847B /* CardStackRelated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD4BFD22DD5D30005D847B /* CardStackRelated.swift */; };
 		33FD4C2022DDB11E005D847B /* CardStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD4C1F22DDB11E005D847B /* CardStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33B4C95122E6A3A7002BB41D /* CardDeckRelated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckRelated.swift; sourceTree = "<group>"; };
 		33F17D1822E29F4200CF2296 /* CardDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckView.swift; sourceTree = "<group>"; };
 		33F4D46722DC547400CB6A0C /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		33F7544222E16D29001C1799 /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
@@ -38,7 +40,7 @@
 		33F9EB1222D8736200A31A8B /* CardError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardError.swift; sourceTree = "<group>"; };
 		33F9EB1522D8736200A31A8B /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		33F9EB1622D8736200A31A8B /* CardGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardGame.swift; sourceTree = "<group>"; };
-		33FD4BFD22DD5D30005D847B /* ShowableToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowableToImage.swift; sourceTree = "<group>"; };
+		33FD4BFD22DD5D30005D847B /* CardStackRelated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackRelated.swift; sourceTree = "<group>"; };
 		33FD4C1F22DDB11E005D847B /* CardStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,7 +79,8 @@
 		33B4C95022E6A141002BB41D /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				33FD4BFD22DD5D30005D847B /* ShowableToImage.swift */,
+				33FD4BFD22DD5D30005D847B /* CardStackRelated.swift */,
+				33B4C95122E6A3A7002BB41D /* CardDeckRelated.swift */,
 				33F9EB1222D8736200A31A8B /* CardError.swift */,
 			);
 			path = Protocol;
@@ -186,12 +189,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33FD4BFE22DD5D30005D847B /* ShowableToImage.swift in Sources */,
+				33FD4BFE22DD5D30005D847B /* CardStackRelated.swift in Sources */,
 				33F17D1922E29F4200CF2296 /* CardDeckView.swift in Sources */,
 				33F825BC22D81987004AFAC0 /* ViewController.swift in Sources */,
 				33F9EB1A22D8736300A31A8B /* CardDeck.swift in Sources */,
 				33F9EB2222D8736300A31A8B /* Card.swift in Sources */,
 				33F4D46822DC547400CB6A0C /* RoundImageView.swift in Sources */,
+				33B4C95222E6A3A7002BB41D /* CardDeckRelated.swift in Sources */,
 				33F825BA22D81987004AFAC0 /* AppDelegate.swift in Sources */,
 				33FD4C2022DDB11E005D847B /* CardStackView.swift in Sources */,
 				33F9EB2322D8736300A31A8B /* CardGame.swift in Sources */,
