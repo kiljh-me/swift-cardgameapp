@@ -25,6 +25,10 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg_pattern")!)
         self.becomeFirstResponder()
         
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(recognizer:)))
+        cardDeckView.addGestureRecognizer(doubleTapGesture)
+        doubleTapGesture.numberOfTapsRequired = 2
+        
         cardGamePlay()
     }
     
@@ -52,21 +56,13 @@ class ViewController: UIViewController {
     }
     
     private func cardGamePlay() {
-        do {
-            cardGame.start()
-            cardStackView.showCardStack(cardGame as! ShowableToCardStack)
-            cardDeckView.showCardBack()
-        }
-        catch let error as InputError
-        {
-            let alert = UIAlertController(title: "오류", message: error.localizedDescription, preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "닫기", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-        catch {
-            
-        }
+        cardGame.start()
+        cardStackView.showCardStack(cardGame as! ShowableToCardStack)
+        cardDeckView.showCardBack()
+    }
+    
+    @objc func handleTapGesture(recognizer: UITapGestureRecognizer) {
+        print("Touch")
     }
 }
 
