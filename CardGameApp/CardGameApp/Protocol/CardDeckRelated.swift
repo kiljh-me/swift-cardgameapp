@@ -12,4 +12,5 @@ protocol ShowableToCardDeck {
     func showToOneCard(handler: (String) -> ()) throws
     func refreshCardDeck()
     func moveToPoint() -> Int
+    func moveToStack() -> Int
 }

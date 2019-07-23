@@ -13,7 +13,6 @@ class CardDeckView: UIView {
     var refreshView = UIView()
     var cardDeck = [UIImageView]()
     
-    
     func showCardBack() {
         let image: UIImage = UIImage(named: ImageFileName.cardBack.rawValue) ?? UIImage()
         backCardView = UIImageView(image: image)
@@ -82,5 +81,25 @@ class CardDeckView: UIView {
     private func removeRefresh() {
         backCardView.removeFromSuperview()
         refreshView.removeFromSuperview()
+    }
+    
+    func moveToCardStack(_ card: ShowableToCardDeck & ShowableToCardStack) {
+        let column = card.moveToStack()
+        
+        if column < 0 {
+            return
+        }
+        
+        let row = card.getCardStackRow(column: column)
+        
+        guard let cardView = cardDeck.last else {
+            return
+        }
+        
+        cardDeck.removeLast()
+        
+        UIImageView.animate(withDuration: 0.15, animations: {
+            cardView.frame = CGRect(x: 20 + 55 * column, y: 100 + 20 * (row - 1), width: 50, height: 63)
+        })
     }
 }

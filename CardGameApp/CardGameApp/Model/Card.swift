@@ -64,6 +64,14 @@ class Card: ShowableToImage {
         return suit == card.suit && rank == Rank(rawValue: card.rank.rawValue + 1)
     }
     
+    func isNextStackThan(_ card: Card) -> Bool {
+        if card.suit == Suit.diamonds || card.suit == Suit.hearts {
+            return (suit == Suit.clubs || suit == Suit.spades) && rank == Rank(rawValue: card.rank.rawValue + 1)
+        }
+        
+        return (suit == Suit.diamonds || suit == Suit.hearts) && rank == Rank(rawValue: card.rank.rawValue + 1)
+    }
+    
     func isHigherThan(_ card: Card) -> Bool {
         let rankPoint = rank.rawValue
         let cardRankPoint = card.rank.rawValue
@@ -111,6 +119,16 @@ class Card: ShowableToImage {
     
     func isEqualToSuit(_ card: Card) -> Bool {
         return suit == card.suit
+    }
+    
+    func isCardStack(_ stacks: [CardStack]) -> Int {
+        for (index, stack) in stacks.enumerated() {
+            if (stack.getLastCard() ?? self).isNextStackThan(self) {
+                return index
+            }
+        }
+        
+        return -1
     }
 }
 

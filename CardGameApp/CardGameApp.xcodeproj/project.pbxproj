@@ -75,8 +75,8 @@
 				33F9EB1622D8736200A31A8B /* CardGame.swift */,
 				33F9EB0D22D8736200A31A8B /* CardDeck.swift */,
 				33F7544222E16D29001C1799 /* CardStack.swift */,
-				33F9EB1522D8736200A31A8B /* Card.swift */,
 				33B4C95822E6F1DE002BB41D /* PointStack.swift */,
+				33F9EB1522D8736200A31A8B /* Card.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

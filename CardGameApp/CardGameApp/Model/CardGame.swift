@@ -64,10 +64,22 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
                 pointStack.append(PointStack(card))
             }
             
-            dump(pointStack)
             return pointStack.count
         }
         
         return 0
+    }
+    
+    func moveToStack() -> Int {
+        guard let card = cardDeck.getOpenCard() else {
+            return -1
+        }
+        
+        let index = card.isCardStack(cardStack)
+        if index >= 0 {
+            cardStack[index].appandToLast(card)
+        }
+        
+        return index
     }
 }

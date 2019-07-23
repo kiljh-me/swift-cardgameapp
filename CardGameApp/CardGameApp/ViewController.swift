@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     var cardGame = CardGame()
     
+    @IBOutlet weak var openCardView: UIView!
     @IBOutlet weak var cardStackView: CardStackView!
     @IBOutlet weak var cardDeckView: CardDeckView!
     
@@ -26,7 +27,7 @@ class ViewController: UIViewController {
         self.becomeFirstResponder()
         
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(recognizer:)))
-        cardDeckView.addGestureRecognizer(doubleTapGesture)
+        openCardView.addGestureRecognizer(doubleTapGesture)
         doubleTapGesture.numberOfTapsRequired = 2
         
         cardGamePlay()
@@ -62,6 +63,6 @@ class ViewController: UIViewController {
     }
     
     @objc func handleTapGesture(recognizer: UITapGestureRecognizer) {
-        print("Touch")
+        cardDeckView.moveToCardStack(cardGame)
     }
 }

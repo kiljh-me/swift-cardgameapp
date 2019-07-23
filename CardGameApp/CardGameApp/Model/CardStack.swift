@@ -33,4 +33,12 @@ struct CardStack: ShowableToCards {
     func getCardsCount() -> Int {
         return cards.count
     }
+    
+    mutating func appandToLast(_ card: Card) {
+        cards.append(card)
+    }
+    
+    func getLastCard() -> Card? {
+        return cards.last
+    }
 }
