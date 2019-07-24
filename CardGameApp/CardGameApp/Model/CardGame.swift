@@ -48,26 +48,34 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     
     func moveToPoint() -> Int {
         guard let card = cardDeck.getOpenCard() else {
-            return 0
+            return -1
         }
         
         if card.isPoint(pointStack) {
             cardDeck.removeOpenCard()
             
-            var sameSuitCardStack = pointStack.filter { (stack) -> Bool in
+            let sameSuitCardStack = pointStack.filter { (stack) -> Bool in
                 return stack.getLastCard()?.isEqualToSuit(card) ?? false
             }
             
             if sameSuitCardStack.count > 0 {
-                sameSuitCardStack[0].appandToLast(card)
+                for (index, stack) in pointStack.enumerated() {
+                    if stack.getLastCard()?.isEqualToSuit(card) ?? false {
+                        pointStack[index].appandToLast(card)
+                    }
+                }
             } else {
                 pointStack.append(PointStack(card))
             }
             
-            return pointStack.count
+            for (index, stack) in pointStack.enumerated() {
+                if stack.getLastCard()?.isEqualToSuit(card) ?? false {
+                    return index
+                }
+            }
         }
         
-        return 0
+        return -1
     }
     
     func moveToStack() -> Int {
@@ -81,5 +89,9 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         }
         
         return index
+    }
+    
+    func count() -> Int {
+        return cardDeck.count()
     }
 }

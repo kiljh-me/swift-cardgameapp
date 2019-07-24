@@ -45,29 +45,32 @@ class CardDeckView: UIView {
                 
                 imageView.frame = CGRect(x: coordinateX, y: coordinateY, width: 50, height: 62)
                 self.addSubview(imageView)
+                cardDeck.append(imageView)
             })
             
-            let deck = card
-            let point = deck.moveToPoint() - 1
-            if point >= 0 {
-                UIImageView.animate(withDuration: 0.15, animations: {
-                                        imageView.frame = CGRect(x: 20 + 55 * point, y: 20, width: 50, height: 63)
-                                    })
-            } else {
-                cardDeck.append(imageView)
+            while true {
+                let point = card.moveToPoint()
+                
+                if point >= 0 {
+                    UIImageView.animate(withDuration: 0.15, animations: {
+                        self.cardDeck.last?.frame = CGRect(x: 20 + 55 * point, y: 20, width: 50, height: 63)
+                                        })
+                    cardDeck.removeLast()
+                } else {
+                    break
+                }
+            }
+            
+            if card.count() == 0 {
+                backCardView.removeFromSuperview()
+                showRefresh()
             }
             
         } catch {
-            backCardView.removeFromSuperview()
-            
-            if !self.refreshView.isDescendant(of: self) {
-                showRefresh()
-            } else {
-                card.refreshCardDeck()
-                removeCardDeck()
-                removeRefresh()
-                showCardBack()
-            }
+            card.refreshCardDeck()
+            removeCardDeck()
+            removeRefresh()
+            showCardBack()
         }
     }
     

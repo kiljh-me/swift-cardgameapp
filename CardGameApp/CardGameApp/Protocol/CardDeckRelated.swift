@@ -13,4 +13,5 @@ protocol ShowableToCardDeck {
     func refreshCardDeck()
     func moveToPoint() -> Int
     func moveToStack() -> Int
+    func count() -> Int
 }
