@@ -21,3 +21,7 @@ protocol ShowableToCards {
 protocol ShowableToImage {
     func showToImage(handler: (String) -> ())
 }
+
+protocol MoveableToStack {
+    func getMovePosition(_ column: Int, _ row: Int)
+}

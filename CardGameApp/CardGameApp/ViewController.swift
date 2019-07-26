@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CardStackDelegate {
     var cardGame = CardGame()
     
     @IBOutlet weak var openCardView: UIView!
@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         doubleTapGesture.numberOfTapsRequired = 2
         
         cardGamePlay()
+        cardStackView.delegate = self
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -63,6 +64,36 @@ class ViewController: UIViewController {
     }
     
     @objc func handleTapGesture(recognizer: UITapGestureRecognizer) {
-        cardDeckView.moveToCardStack(cardGame)
+        let (view, column) = cardDeckView.moveToCardStack(cardGame)
+        
+        if let view = view {
+            cardStackView.stackView[column].append(view)
+        }
+    }
+    
+    func doubleTapCard(_ column: Int, _ row: Int) {
+        let index = cardGame.getMovePoint(column, row)
+        if index >= 0 {
+            let view = cardStackView.animateToPoint(column, row, index)
+            view.frame = CGRect(x: 20 + 55 * index, y: 20, width: 50, height: 63)
+            cardDeckView.addSubview(view)
+        
+            cardGame.openLastCard(column)
+            if row >= 1 {
+                cardStackView.openLastCard(cardGame, column, row-1)
+            }
+            return
+        }
+        
+        let (move, count) = cardGame.getMoveStack(column, row)
+        
+        if move >= 0 {
+            for index in 0..<count {
+                cardStackView.animateToStack(column, row+index, move)
+            }
+            
+            cardGame.openLastCard(column)
+            cardStackView.openLastCard(cardGame, column, row-1)
+        }
     }
 }

@@ -41,4 +41,23 @@ struct CardStack: ShowableToCards {
     func getLastCard() -> Card? {
         return cards.last
     }
+    
+    func getIndexCard(_ index: Int) -> Card? {
+        return cards[index]
+    }
+    
+    mutating func removeLast() {
+        cards.removeLast()
+    }
+    
+    mutating func removeIndexCard(_ index: Int) -> Card? {
+        let card = cards[index]
+        cards.remove(at: index)
+        
+        return card
+    }
+    
+    mutating func openLastCard() {
+        cards.last?.open()
+    }
 }

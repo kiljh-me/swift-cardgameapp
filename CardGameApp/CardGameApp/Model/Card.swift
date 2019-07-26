@@ -103,18 +103,28 @@ class Card: ShowableToImage {
         back = !back
     }
     
-    func isPoint(_ pointStacks: [PointStack]) -> Bool {
-        if rank == Rank.ace {
-            return true
+    func open() {
+        if back {
+            back = false
+        }
+    }
+    
+    func isPoint(_ pointStacks: [PointStack]) -> Int {
+        if back == true {
+            return -1
         }
         
-        for cardStack in pointStacks {
+        if rank == Rank.ace {
+            return pointStacks.count
+        }
+        
+        for (index, cardStack) in pointStacks.enumerated() {
             if isNextRankThan(cardStack.getLastCard() ?? self) {
-                return true
+                return index
             }
         }
         
-        return false
+        return -1
     }
     
     func isEqualToSuit(_ card: Card) -> Bool {
