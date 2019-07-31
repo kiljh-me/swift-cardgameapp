@@ -86,8 +86,13 @@ class CardDeck {
         return openCards.last
     }
     
-    /// 오픈한 가장 위에 카드 제거
+    /// 오픈한 가장 위에 카드 제거한다.
     func removeOpenCard() {
         openCards.removeLast()
+    }
+    
+    /// 열려있는 가장 위에 카드가 K 인지 확인한다.
+    func isK() -> Bool {
+        return openCards.last?.isK() ?? false
     }
 }

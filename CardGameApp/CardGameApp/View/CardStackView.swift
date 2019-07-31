@@ -52,8 +52,6 @@ class CardStackView: UIView {
             
             imageView.addGestureRecognizer(doubleTapGesture)
             
-            
-            
             stackView[column].append(imageView)
         })
     }
@@ -80,6 +78,7 @@ class CardStackView: UIView {
                 })
         let view = stackView[column][row]
         
+        stackView[column][row].removeFromSuperview()
         stackView[column].remove(at: row)
         
         return view
@@ -90,19 +89,15 @@ class CardStackView: UIView {
         showCard(cardStack, column, row)
     }
     
-    func animateToStack(_ column: Int, _ row: Int, _ moveColumn: Int) {
+    func animateToStack(_ cardStack: ShowableToCardStack,_ column: Int, _ row: Int, _ moveColumn: Int) {
         let moveRow = stackView[moveColumn].count
         
         UIImageView.animate(withDuration: 0.15, animations: {
             self.stackView[column][row].frame = CGRect(x: 20 + 55 * moveColumn, y: 20 * moveRow, width: 50, height: 63)
         })
         
-        stackView[moveColumn].append(stackView[column][row])
-        let view = stackView[moveColumn].last
-        if let view = view {
-            self.bringSubviewToFront(view)
-        }
-
-        stackView[column].remove(at: row)
+        self.showCard(cardStack, moveColumn, moveRow)
+        self.stackView[column][row].removeFromSuperview()
+        self.stackView[column].remove(at: row)
     }
 }

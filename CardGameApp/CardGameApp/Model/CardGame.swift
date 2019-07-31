@@ -10,35 +10,35 @@ import Foundation
 
 class CardGame: ShowableToCardStack, ShowableToCardDeck {
     private var cardDeck =  CardDeck()
-    private var cardStack = [CardStack]()
-    private var pointStack = [PointStack]()
+    private var cardStacks = [CardStack]()
+    private var pointStacks = [PointStack]()
 
     /// 게임 종료
     func end() {
         cardDeck = CardDeck()
-        cardStack.removeAll()
-        pointStack.removeAll()
+        cardStacks.removeAll()
+        pointStacks.removeAll()
     }
     
     /// 게임 시작
     func start() {
         for index in 1...7 {
-            cardStack.append(CardStack(layer: index, cardDeck: cardDeck))
+            cardStacks.append(CardStack(layer: index, cardDeck: cardDeck))
         }
     }
     
     func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
-        cardStack[column].showToCardStack(column, row, handler: handler)
+        cardStacks[column].showToCardStack(column, row, handler: handler)
     }
     
     func getCardStackRow(column: Int) -> Int {
-        return cardStack[column].getCardsCount()
+        return cardStacks[column].getCardsCount()
     }
     
     func showToOneCard(handler: (String) -> ()) throws {
         let card = try cardDeck.openOne()
         
-        card.flip()
+        card.open()
         card.showToImage(handler: handler)
     }
     
@@ -51,7 +51,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
             return -1
         }
         
-        let point = card.isPoint(pointStack)
+        let point = card.isPoint(pointStacks)
         
         if point < 0 {
             return -1
@@ -59,13 +59,13 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         
         cardDeck.removeOpenCard()
         
-        if pointStack.count == point {
-            pointStack.append(PointStack(card))
+        if pointStacks.count == point {
+            pointStacks.append(PointStack(card))
             
             return point
         }
         
-        pointStack[point].appandToLast(card)
+        pointStacks[point].appandToLast(card)
         
         return point
     }
@@ -75,9 +75,10 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
             return -1
         }
         
-        let index = card.isCardStack(cardStack)
+        let index = card.isCardStack(cardStacks)
         if index >= 0 {
-            cardStack[index].appandToLast(card)
+            cardStacks[index].appandToLast(card)
+            cardDeck.removeOpenCard()
         }
         
         return index
@@ -88,64 +89,120 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     }
     
     func getMovePoint(_  column: Int, _ row: Int) -> Int {
-        guard let card = cardStack[column].getIndexCard(row) else {
+        if row != cardStacks[column].getCardsCount()-1 {
             return -1
         }
         
-        let point = card.isPoint(pointStack)
+        guard let card = cardStacks[column].getIndexCard(row) else {
+            return -1
+        }
+        
+        let point = card.isPoint(pointStacks)
         
         if point < 0 {
             return -1
         }
         
-        cardStack[column].removeLast()
+        cardStacks[column].removeLast()
         
-        if pointStack.count == point {
-            pointStack.append(PointStack(card))
+        if pointStacks.count == point {
+            pointStacks.append(PointStack(card))
             
             return point
         }
         
-        pointStack[point].appandToLast(card)
+        pointStacks[point].appandToLast(card)
         
         return point
     }
     
     func openLastCard(_ column: Int) {
-        cardStack[column].openLastCard()
+        cardStacks[column].openLastCard()
     }
     
     
     func getMoveStack(_ column: Int, _ row: Int) -> (Int, Int) {
-        let card = cardStack[column].getIndexCard(row)
+        let card = cardStacks[column].getIndexCard(row)
         var count = 0
         
-        var index = card?.isCardStack([cardStack[cardStack.index(column, offsetBy: cardStack.count-column-1)]])
+        var index = card?.isCardStack([cardStacks[cardStacks.index(column, offsetBy: cardStacks.count-column-1)]])
         
-        if let index = index, index >= 0 {
-            for rowIndex in row...cardStack[column].getCardsCount()-1 {
-                if let card = cardStack[column].removeIndexCard(rowIndex) {
-                    cardStack[index].appandToLast(card)
+        if let index = index , index >= 0 {
+            while cardStacks[column].getCardsCount() > row {
+                if let card = cardStacks[column].removeIndexCard(row) {
+                    cardStacks[index + column].appandToLast(card)
+                    count += 1
                 }
-                count += 1
             }
             
-            return (index, count)
+            return (index + column, count)
         }
         
-        index = card?.isCardStack(cardStack)
+        index = card?.isCardStack(cardStacks)
         
         if let index = index, index >= 0 {
-            for rowIndex in row...cardStack[column].getCardsCount()-1 {
-                if let card = cardStack[column].removeIndexCard(rowIndex) {
-                    cardStack[index].appandToLast(card)
+            while cardStacks[column].getCardsCount() > row {
+                if let card = cardStacks[column].removeIndexCard(row) {
+                    cardStacks[index].appandToLast(card)
+                    count += 1
                 }
-                count += 1
             }
             
             return (index, count)
         }
         
         return (index ?? -1, -1)
+    }
+    
+    func moveableK() -> Int {
+        if cardDeck.isK() {
+            guard let cardK = cardDeck.getOpenCard() else {
+                return -1
+            }
+            cardDeck.removeOpenCard()
+            
+            guard let index = blankIndexToCardStack() else {
+                return -1
+            }
+            
+            cardStacks[index].appandToLast(cardK)
+        }
+        
+        return -1
+    }
+    
+    private func blankIndexToCardStack() -> Int? {
+        for (index, cardStack) in cardStacks.enumerated() {
+            if cardStack.getLastCard() == nil {
+                return index
+            }
+        }
+        
+        return nil
+    }
+    
+    func isK(_ column: Int, _ row: Int) -> Bool {
+        guard let card = cardStacks[column].getIndexCard(row) else {
+            return false
+        }
+        
+        return card.isK()
+    }
+    
+    func kCardMoveStackToStack(_ column: Int, _ row: Int) -> (Int, Int) {
+        var count = 0
+        
+        guard let index = blankIndexToCardStack() else {
+            return (-1, -1)
+        }
+        
+        while cardStacks[column].getCardsCount() > row {
+            if let card = cardStacks[column].removeIndexCard(row) {
+                cardStacks[index].appandToLast(card)
+                count += 1
+            }
+        }
+        
+        return (index, count)
     }
 }

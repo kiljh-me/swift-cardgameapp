@@ -11,7 +11,7 @@ import UIKit
 class CardDeckView: UIView {
     var backCardView = UIView()
     var refreshView = UIView()
-    var cardDeck = [UIImageView]()
+    var openCards = [UIImageView]()
     
     func showCardBack() {
         let image: UIImage = UIImage(named: ImageFileName.cardBack.rawValue) ?? UIImage()
@@ -25,11 +25,11 @@ class CardDeckView: UIView {
             view.removeFromSuperview()
         }
         
-        cardDeck = [UIImageView]()
+        openCards = [UIImageView]()
     }
     
     func removeCardDeck() {
-        for view in cardDeck {
+        for view in openCards {
             view.removeFromSuperview()
         }
     }
@@ -47,7 +47,7 @@ class CardDeckView: UIView {
                 
                 imageView.frame = CGRect(x: coordinateX, y: coordinateY, width: 50, height: 62)
                 self.addSubview(imageView)
-                cardDeck.append(imageView)
+                openCards.append(imageView)
             })
             
             while true {
@@ -55,9 +55,9 @@ class CardDeckView: UIView {
                 
                 if point >= 0 {
                     UIImageView.animate(withDuration: 0.15, animations: {
-                        self.cardDeck.last?.frame = CGRect(x: 20 + 55 * point, y: 20, width: 50, height: 63)
+                        self.openCards.last?.frame = CGRect(x: 20 + 55 * point, y: 20, width: 50, height: 63)
                                         })
-                    cardDeck.removeLast()
+                    openCards.removeLast()
                 } else {
                     break
                 }
@@ -97,11 +97,11 @@ class CardDeckView: UIView {
         
         let row = card.getCardStackRow(column: column)
         
-        guard let cardView = cardDeck.last else {
+        guard let cardView = openCards.last else {
             return (nil, -1)
         }
         
-        cardDeck.removeLast()
+        openCards.removeLast()
         
         UIImageView.animate(withDuration: 0.15, animations: {
             cardView.frame = CGRect(x: 20 + 55 * column, y: 100 + 20 * (row - 1), width: 50, height: 63)

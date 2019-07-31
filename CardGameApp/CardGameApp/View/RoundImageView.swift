@@ -11,7 +11,7 @@ import UIKit
 class RoundImageView: UIView {
     override func awakeFromNib() {
         self.layer.cornerRadius = 3
-        self.layer.borderWidth = 1;
+        self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.lightGray.cgColor
     }
 }

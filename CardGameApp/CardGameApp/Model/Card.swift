@@ -140,6 +140,10 @@ class Card: ShowableToImage {
         
         return -1
     }
+    
+    func isK() -> Bool {
+        return rank == Rank.king
+    }
 }
 
 extension Card: CustomStringConvertible {

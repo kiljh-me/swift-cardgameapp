@@ -23,7 +23,7 @@ struct CardStack: ShowableToCards {
             }
         }
         
-        cards.last?.flip()
+        cards.last?.open()
     }
     
     func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
