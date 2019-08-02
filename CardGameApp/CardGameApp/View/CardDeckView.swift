@@ -51,11 +51,12 @@ class CardDeckView: UIView {
             })
             
             while true {
-                if let point = card.moveToPoint() {
+                if let point = card.moveToPointStack() {
                     UIImageView.animate(withDuration: 0.15, animations: {
                         self.openCards.last?.frame = CGRect(x: 20 + 55 * point, y: 20, width: 50, height: 63)
-                                        })
-                    openCards.removeLast()
+                    }, completion: { (finished: Bool) in
+                        self.openCards.removeLast()
+                    })
                 } else {
                     break
                 }
@@ -87,7 +88,7 @@ class CardDeckView: UIView {
     }
     
     func moveToCardStack(_ card: ShowableToCardDeck & ShowableToCardStack) -> (UIImageView?, Int) {
-        guard let column = card.moveToStack() else {
+        guard let column = card.moveToCardStack() else {
             return (nil, -1)
         }
         

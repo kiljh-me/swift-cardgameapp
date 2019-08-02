@@ -44,7 +44,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         cardDeck.refresh()
     }
     
-    func moveToPoint() -> Int? {
+    func moveToPointStack() -> Int? {
         guard let card = cardDeck.getOpenCard() else {
             return nil
         }
@@ -68,12 +68,12 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         return point
     }
     
-    func moveToStack() -> Int? {
+    func moveToCardStack() -> Int? {
         guard let card = cardDeck.getOpenCard() else {
             return nil
         }
         
-        if let index = card.isCardStack(cardStacks), index >= 0 && index <= 6 {
+        if let index = card.isCardStack(cardStacks) {
             cardStacks.appendToLast(column: index, card)
             cardDeck.removeOpenCard()
             
@@ -87,7 +87,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         return cardDeck.count()
     }
     
-    func getMovePoint(_  column: Int, _ row: Int) -> Int? {
+    func movePointStack(_  column: Int, _ row: Int) -> Int? {
         if row != cardStacks.getCardsCount(column: column)-1 {
             return nil
         }

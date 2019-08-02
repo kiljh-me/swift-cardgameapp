@@ -65,11 +65,12 @@ class ViewController: UIViewController, CardStackDelegate {
     
     @objc func handleTapGesture(recognizer: UITapGestureRecognizer) {
         while true {
-            if let point = cardGame.moveToPoint() {
+            if let pointStackColumn = cardGame.moveToPointStack() {
                 UIImageView.animate(withDuration: 0.15, animations: {
-                    self.cardDeckView.openCards.last?.frame = CGRect(x: 20 + 55 * point, y: 20, width: 50, height: 63)
+                    self.cardDeckView.openCards.last?.frame = CGRect(x: 20 + 55 * pointStackColumn, y: 20, width: 50, height: 63)
+                }, completion: { (finished: Bool) in
+                    self.cardDeckView.openCards.removeLast()
                 })
-                cardDeckView.openCards.removeLast()
             } else {
                 break
             }
@@ -94,10 +95,9 @@ class ViewController: UIViewController, CardStackDelegate {
     }
     
     func doubleTapCard(_ column: Int, _ row: Int) {
-        let index = cardGame.getMovePoint(column, row)
+        let index = cardGame.movePointStack(column, row)
         
-        if let index = index {
-            let view = cardStackView.animateToPoint(column, row, index)
+        if let index = index, let view = cardStackView.animateToPoint(column, row, index) {
             view.frame = CGRect(x: 20 + 55 * index, y: 20, width: 50, height: 63)
             cardDeckView.addSubview(view)
             

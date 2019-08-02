@@ -72,14 +72,18 @@ class CardStackView: UIView {
         }
     }
     
-    func animateToPoint(_ column: Int, _ row: Int, _ pointIndex: Int) -> UIImageView {
+    func animateToPoint(_ column: Int, _ row: Int, _ pointIndex: Int) -> UIImageView? {
+        var view: UIImageView?
+        
         UIImageView.animate(withDuration: 0.15, animations: {
                     self.stackView[column][row].frame = CGRect(x: 20 + 55 * pointIndex, y: -80, width: 50, height: 63)
-                })
-        let view = stackView[column][row]
-        
-        stackView[column][row].removeFromSuperview()
-        stackView[column].remove(at: row)
+        }, completion: { (finished: Bool) in
+            view = self.stackView[column][row]
+            
+            self.stackView[column][row].removeFromSuperview()
+            self.stackView[column].remove(at: row)
+            
+        })
         
         return view
     }
@@ -94,10 +98,10 @@ class CardStackView: UIView {
         
         UIImageView.animate(withDuration: 0.15, animations: {
             self.stackView[column][row].frame = CGRect(x: 20 + 55 * moveColumn, y: 20 * moveRow, width: 50, height: 63)
+        }, completion: { (finished: Bool) in
+            self.showCard(cardStack, moveColumn, moveRow)
+            self.stackView[column][row].removeFromSuperview()
+            self.stackView[column].remove(at: row)
         })
-        
-        self.showCard(cardStack, moveColumn, moveRow)
-        self.stackView[column][row].removeFromSuperview()
-        self.stackView[column].remove(at: row)
     }
 }
