@@ -92,7 +92,7 @@ class CardDeck {
     }
     
     /// 열려있는 가장 위에 카드가 K 인지 확인한다.
-    func isK() -> Bool {
+    func isCardKAtOpenCardTop() -> Bool {
         return openCards.last?.isK() ?? false
     }
 }

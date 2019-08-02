@@ -155,7 +155,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     }
     
     func moveableK() -> Int {
-        if cardDeck.isK() {
+        if cardDeck.isCardKAtOpenCardTop() {
             guard let cardK = cardDeck.getOpenCard() else {
                 return -1
             }
