@@ -65,9 +65,7 @@ class ViewController: UIViewController, CardStackDelegate {
     
     @objc func handleTapGesture(recognizer: UITapGestureRecognizer) {
         while true {
-            let point = cardGame.moveToPoint()
-            
-            if point >= 0 {
+            if let point = cardGame.moveToPoint() {
                 UIImageView.animate(withDuration: 0.15, animations: {
                     self.cardDeckView.openCards.last?.frame = CGRect(x: 20 + 55 * point, y: 20, width: 50, height: 63)
                 })
@@ -83,21 +81,22 @@ class ViewController: UIViewController, CardStackDelegate {
             cardStackView.stackView[column].append(view)
         }
         
-        let blankIndex = cardGame.moveableK()
-        
-        if blankIndex >= 0 {
-            UIImageView.animate(withDuration: 0.15, animations: {
-                self.cardDeckView.openCards.last?.frame = CGRect(x: 20 + 55 * blankIndex, y: 100, width: 50, height: 63)
-            })
-            
-            let kView = cardDeckView.openCards.removeLast()
-            cardStackView.stackView[blankIndex].append(kView)
+        guard let blankIndex = cardGame.moveableK() else {
+            return
         }
+        
+        UIImageView.animate(withDuration: 0.15, animations: {
+            self.cardDeckView.openCards.last?.frame = CGRect(x: 20 + 55 * blankIndex, y: 100, width: 50, height: 63)
+        })
+        
+        let kView = cardDeckView.openCards.removeLast()
+        cardStackView.stackView[blankIndex].append(kView)
     }
     
     func doubleTapCard(_ column: Int, _ row: Int) {
         let index = cardGame.getMovePoint(column, row)
-        if index >= 0 {
+        
+        if let index = index {
             let view = cardStackView.animateToPoint(column, row, index)
             view.frame = CGRect(x: 20 + 55 * index, y: 20, width: 50, height: 63)
             cardDeckView.addSubview(view)
@@ -111,7 +110,7 @@ class ViewController: UIViewController, CardStackDelegate {
         
         let (move, count) = cardGame.getMoveStack(column, row)
         
-        if move >= 0 {
+        if let move = move {
             for _ in 0..<count {
                 cardStackView.animateToStack(cardGame, column, row, move)
             }
@@ -122,10 +121,9 @@ class ViewController: UIViewController, CardStackDelegate {
             }
         }
     
-        if (index < 0 && move < 0) && cardGame.isK(column, row) {
+        if index == nil && move == nil && cardGame.isK(column, row) {
             let (move, count) = cardGame.kCardMoveStackToStack(column, row)
-            
-            if move >= 0 {
+            if let move = move {
                 for _ in 0..<count {
                     cardStackView.animateToStack(cardGame, column, row, move)
                 }

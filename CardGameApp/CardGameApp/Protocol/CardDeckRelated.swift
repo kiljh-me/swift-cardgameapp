@@ -11,7 +11,7 @@ import Foundation
 protocol ShowableToCardDeck {
     func showToOneCard(handler: (String) -> ()) throws
     func refreshCardDeck()
-    func moveToPoint() -> Int
-    func moveToStack() -> Int
+    func moveToPoint() -> Int?
+    func moveToStack() -> Int?
     func count() -> Int
 }

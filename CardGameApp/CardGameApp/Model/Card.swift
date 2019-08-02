@@ -131,14 +131,8 @@ class Card: ShowableToImage {
         return suit == card.suit
     }
     
-    func isCardStack(_ stacks: [CardStack]) -> Int {
-        for (index, stack) in stacks.enumerated() {
-            if (stack.getLastCard() ?? self).isNextStackThan(self) {
-                return index
-            }
-        }
-        
-        return -1
+    func isCardStack(_ cardStacks: CardStacks) -> Int? {
+        return cardStacks.isMoveableToStack(self)
     }
     
     func isK() -> Bool {

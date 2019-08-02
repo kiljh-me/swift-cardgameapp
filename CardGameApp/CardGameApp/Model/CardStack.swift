@@ -34,7 +34,7 @@ struct CardStack: ShowableToCards {
         return cards.count
     }
     
-    mutating func appandToLast(_ card: Card) {
+    mutating func appendToLast(_ card: Card) {
         cards.append(card)
     }
     
