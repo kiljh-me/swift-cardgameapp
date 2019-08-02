@@ -89,7 +89,7 @@ class CardDeckView: UIView {
     }
     
     func moveToCardStack(_ card: ShowableToCardDeck & ShowableToCardStack) -> (UIImageView?, Int) {
-        let column = card.moveToStack()
+         let column = card.moveToStack()
         
         if column < 0 {
             return (nil, -1)

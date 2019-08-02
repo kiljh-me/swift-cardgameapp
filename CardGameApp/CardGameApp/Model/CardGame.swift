@@ -125,9 +125,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         let card = cardStacks[column].getIndexCard(row)
         var count = 0
         
-        var index = card?.isCardStack([cardStacks[cardStacks.index(column, offsetBy: cardStacks.count-column-1)]])
-        
-        if let index = index , index >= 0 {
+        if let index = card?.isCardStack([cardStacks[cardStacks.index(column, offsetBy: cardStacks.count-column-1)]]) , index >= 0 {
             while cardStacks[column].getCardsCount() > row {
                 if let card = cardStacks[column].removeIndexCard(row) {
                     cardStacks[index + column].appandToLast(card)
@@ -136,22 +134,13 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
             }
             
             return (index + column, count)
-        }
-        
-        index = card?.isCardStack(cardStacks)
-        
-        if let index = index, index >= 0 {
-            while cardStacks[column].getCardsCount() > row {
-                if let card = cardStacks[column].removeIndexCard(row) {
-                    cardStacks[index].appandToLast(card)
-                    count += 1
-                }
-            }
+        } else if let index = card?.isCardStack(cardStacks), index >= 0 {
+            let count = moveCards(column, row, index)
             
             return (index, count)
         }
         
-        return (index ?? -1, -1)
+        return (-1, -1)
     }
     
     func moveableK() -> Int {
@@ -166,6 +155,8 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
             }
             
             cardStacks[index].appandToLast(cardK)
+            
+            return index
         }
         
         return -1
@@ -190,19 +181,25 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     }
     
     func kCardMoveStackToStack(_ column: Int, _ row: Int) -> (Int, Int) {
-        var count = 0
-        
-        guard let index = blankIndexToCardStack() else {
+        guard let arrivingColumn = blankIndexToCardStack() else {
             return (-1, -1)
         }
         
+        let count = moveCards(column, row, arrivingColumn)
+        
+        return (arrivingColumn, count)
+    }
+    
+    func moveCards(_ column: Int, _ row: Int, _ arrivingColumn: Int) -> Int {
+        var count = 0
+        
         while cardStacks[column].getCardsCount() > row {
             if let card = cardStacks[column].removeIndexCard(row) {
-                cardStacks[index].appandToLast(card)
+                cardStacks[arrivingColumn].appandToLast(card)
                 count += 1
             }
         }
         
-        return (index, count)
+        return count
     }
 }
