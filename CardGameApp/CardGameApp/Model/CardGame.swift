@@ -144,22 +144,23 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     }
     
     func moveableK() -> Int {
-        if cardDeck.isCardKAtOpenCardTop() {
-            guard let cardK = cardDeck.getOpenCard() else {
-                return -1
-            }
-            cardDeck.removeOpenCard()
-            
-            guard let index = blankIndexToCardStack() else {
-                return -1
-            }
-            
-            cardStacks[index].appandToLast(cardK)
-            
-            return index
+        guard cardDeck.isCardKAtOpenCardTop() else {
+            return -1
         }
         
-        return -1
+        guard let cardK = cardDeck.getOpenCard() else {
+            return -1
+        }
+        
+        cardDeck.removeOpenCard()
+        
+        guard let index = blankIndexToCardStack() else {
+            return -1
+        }
+        
+        cardStacks[index].appandToLast(cardK)
+        
+        return index
     }
     
     private func blankIndexToCardStack() -> Int? {
