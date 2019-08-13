@@ -46,10 +46,11 @@ class CardStackView: UIView {
             self.addSubview(imageView)
             imageView.isUserInteractionEnabled = true
             
-            let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(recognizer:)))
+            let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(draggingView))
             doubleTapGesture.numberOfTapsRequired = 2
             
-            
+            let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(draggingView))
+            imageView.addGestureRecognizer(dragGesture)
             imageView.addGestureRecognizer(doubleTapGesture)
             
             stackView[column].append(imageView)
@@ -103,5 +104,15 @@ class CardStackView: UIView {
             self.stackView[column][row].removeFromSuperview()
             self.stackView[column].remove(at: row)
         })
+    }
+    
+    @objc func draggingView(_ sender: UIPanGestureRecognizer) {
+        let point = sender.location(in: self)
+        let draggedView = sender.view!
+        draggedView.center = point
+        
+        if sender.state == .ended {
+            print(point)
+        }
     }
 }
