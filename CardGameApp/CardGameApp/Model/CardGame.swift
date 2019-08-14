@@ -120,8 +120,6 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     }
     
     func getMoveStack(_ column: Int, _ row: Int) -> (Int?, Int) {
-        var count = 0
-        
         let cardStacksPart = cardStacks.getCardStacksPart(firstColumn: column)
         
         guard let card = cardStacks.getIndexCard(column: column, row: row) else {
