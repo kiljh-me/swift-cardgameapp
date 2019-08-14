@@ -10,11 +10,13 @@ import UIKit
 
 protocol CardStackDelegate {
     func doubleTapCard(_ column: Int, _ row: Int)
+    func moveToPoint(_ column: Int, _ row: Int)
 }
 
 class CardStackView: UIView {
     var stackView = Array(repeating: [UIImageView](), count: 7)
     var delegate: CardStackDelegate?
+    var originCenter: CGPoint?
     
     func removeSubViews() {
         for view in self.subviews {
@@ -46,7 +48,7 @@ class CardStackView: UIView {
             self.addSubview(imageView)
             imageView.isUserInteractionEnabled = true
             
-            let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(draggingView))
+            let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(recognizer:)))
             doubleTapGesture.numberOfTapsRequired = 2
             
             let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(draggingView))
@@ -76,16 +78,14 @@ class CardStackView: UIView {
     func animateToPoint(_ column: Int, _ row: Int, _ pointIndex: Int) -> UIImageView? {
         var view: UIImageView?
         
-        UIImageView.animate(withDuration: 0.15, animations: {
+        UIView.animate(withDuration: 0.15, animations: {
                     self.stackView[column][row].frame = CGRect(x: 20 + 55 * pointIndex, y: -80, width: 50, height: 63)
-        }, completion: { (finished: Bool) in
-            view = self.stackView[column][row]
-            
-            self.stackView[column][row].removeFromSuperview()
-            self.stackView[column].remove(at: row)
-            
         })
         
+        view = self.stackView[column][row]
+        self.stackView[column][row].removeFromSuperview()
+        self.stackView[column].remove(at: row)
+
         return view
     }
     
@@ -99,20 +99,38 @@ class CardStackView: UIView {
         
         UIImageView.animate(withDuration: 0.15, animations: {
             self.stackView[column][row].frame = CGRect(x: 20 + 55 * moveColumn, y: 20 * moveRow, width: 50, height: 63)
-        }, completion: { (finished: Bool) in
-            self.showCard(cardStack, moveColumn, moveRow)
-            self.stackView[column][row].removeFromSuperview()
-            self.stackView[column].remove(at: row)
         })
+            
+        self.showCard(cardStack, moveColumn, moveRow)
+        self.stackView[column][row].removeFromSuperview()
+        self.stackView[column].remove(at: row)
     }
     
     @objc func draggingView(_ sender: UIPanGestureRecognizer) {
         let point = sender.location(in: self)
         let draggedView = sender.view!
+        
+        if sender.state == .began {
+           originCenter = draggedView.center
+        }
+        
         draggedView.center = point
         
         if sender.state == .ended {
-            print(point)
+            if point.y <= 0 {
+                var row = -1
+                var column = -1
+                
+                for (i, stack) in stackView.enumerated() {
+                    if let j = stack.firstIndex(of: draggedView as! UIImageView) {
+                        column = i
+                        row = j
+                    }
+                }
+                delegate?.moveToPoint(column, row)
+            } else {
+                draggedView.center = originCenter ?? CGPoint(x: 0, y: 0)
+            }
         }
     }
 }

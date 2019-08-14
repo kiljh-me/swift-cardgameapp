@@ -68,9 +68,9 @@ class ViewController: UIViewController, CardStackDelegate {
             if let pointStackColumn = cardGame.moveToPointStack() {
                 UIImageView.animate(withDuration: 0.15, animations: {
                     self.cardDeckView.openCards.last?.frame = CGRect(x: 20 + 55 * pointStackColumn, y: 20, width: 50, height: 63)
-                }, completion: { (finished: Bool) in
-                    self.cardDeckView.openCards.removeLast()
                 })
+                
+                self.cardDeckView.openCards.removeLast()
             } else {
                 break
             }
@@ -92,6 +92,20 @@ class ViewController: UIViewController, CardStackDelegate {
         
         let kView = cardDeckView.openCards.removeLast()
         cardStackView.stackView[blankIndex].append(kView)
+    }
+    
+    func moveToPoint(_ column: Int, _ row: Int) {
+        let index = cardGame.movePointStack(column, row)
+
+        if let index = index, let view = cardStackView.animateToPoint(column, row, index) {
+            view.frame = CGRect(x: 20 + 55 * index, y: 20, width: 50, height: 63)
+            cardDeckView.addSubview(view)
+
+            cardGame.openLastCard(column)
+            if row >= 1 {
+                cardStackView.openLastCard(cardGame, column, row-1)
+            }
+        }
     }
     
     func doubleTapCard(_ column: Int, _ row: Int) {
