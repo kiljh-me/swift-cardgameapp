@@ -94,7 +94,7 @@ class ViewController: UIViewController, CardStackDelegate {
         cardStackView.stackView[blankIndex].append(kView)
     }
     
-    func moveToPoint(_ column: Int, _ row: Int) {
+    func moveToPoint(column: Int, row: Int) {
         let index = cardGame.movePointStack(column, row)
 
         if let index = index, let view = cardStackView.animateToPoint(column, row, index) {
@@ -108,7 +108,41 @@ class ViewController: UIViewController, CardStackDelegate {
         }
     }
     
-    func doubleTapCard(_ column: Int, _ row: Int) {
+    func moveToStack(column: Int, row: Int, toColumn: Int) -> Bool {
+        let (move, count) = cardGame.getMoveableToStack(column: column, row: row, toColumn: toColumn)
+        
+        if let move = move {
+            for _ in 0..<count {
+                cardStackView.animateToStack(cardGame, column, row, move)
+            }
+            
+            cardGame.openLastCard(column)
+            if row >= 1 {
+                cardStackView.openLastCard(cardGame, column, row-1)
+            }
+            return true
+        }
+        
+        if cardGame.isMovableK(column: column, row: row, toColumn: toColumn) {
+            let (move, count) = cardGame.kCardMoveStackToStack(column, row)
+            if let move = move {
+                for _ in 0..<count {
+                    cardStackView.animateToStack(cardGame, column, row, move)
+                }
+                
+                cardGame.openLastCard(column)
+                if row >= 1 {
+                    cardStackView.openLastCard(cardGame, column, row-1)
+                }
+            }
+            
+            return true
+        }
+        
+        return false
+    }
+    
+    func doubleTapCard(column: Int, row: Int) {
         let index = cardGame.movePointStack(column, row)
         
         if let index = index, let view = cardStackView.animateToPoint(column, row, index) {
@@ -148,5 +182,9 @@ class ViewController: UIViewController, CardStackDelegate {
                 }
             }
         }
+    }
+    
+    func isMovableCard(column: Int, row: Int) -> Bool {
+        return cardGame.isMovableCard(column: column, row: row)
     }
 }

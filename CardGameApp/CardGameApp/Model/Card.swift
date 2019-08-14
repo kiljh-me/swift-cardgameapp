@@ -138,6 +138,14 @@ class Card: ShowableToImage {
     func isK() -> Bool {
         return rank == Rank.king
     }
+    
+    func isMovableK(_ cardStacks: CardStacks) -> Bool {
+        if cardStacks.blankIndexAtCardStack() == 0 {
+            return true
+        }
+        
+        return false
+    }
 }
 
 extension Card: CustomStringConvertible {
@@ -159,5 +167,9 @@ extension Card: CustomStringConvertible {
         
         let name = getImageName()
         handler(name)
+    }
+    
+    func isBack() -> Bool {
+        return back
     }
 }

@@ -141,6 +141,22 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         return (nil, 0)
     }
     
+    func getMoveableToStack(column: Int, row: Int, toColumn: Int) -> (Int?, Int) {
+        let cardStacksPart = cardStacks.getCardStacksOne(column: toColumn)
+        
+        guard let card = cardStacks.getIndexCard(column: column, row: row) else {
+            return (nil, 0)
+        }
+        
+        if var index = card.isCardStack(cardStacksPart), index >= 0 {
+            let count = moveCards(column, row, toColumn)
+            
+            return (toColumn, count)
+        }
+        
+        return (nil, 0)
+    }
+    
     func moveableK() -> Int? {
         guard cardDeck.isCardKAtOpenCardTop() else {
             return nil
@@ -173,6 +189,16 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         return card.isK()
     }
     
+    func isMovableK(column: Int, row: Int, toColumn: Int) -> Bool {
+        let cardStacksPart = cardStacks.getCardStacksOne(column: toColumn)
+        
+        guard let card = cardStacks.getIndexCard(column: column, row: row) else {
+            return false
+        }
+        
+        return card.isMovableK(cardStacksPart)
+    }
+    
     func kCardMoveStackToStack(_ column: Int, _ row: Int) -> (Int?, Int) {
         guard let arrivingColumn = blankIndexAtCardStack() else {
             return (nil, 0)
@@ -194,5 +220,9 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         }
         
         return count
+    }
+    
+    func isMovableCard(column: Int, row: Int) -> Bool {
+        return cardStacks.isMovableCard(column: column, row: row)
     }
 }

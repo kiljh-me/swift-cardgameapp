@@ -60,4 +60,8 @@ struct CardStack: ShowableToCards {
     mutating func openLastCard() {
         cards.last?.open()
     }
+    
+    func isMovableCard(row: Int) -> Bool {
+        return !cards[row].isBack()
+    }
 }

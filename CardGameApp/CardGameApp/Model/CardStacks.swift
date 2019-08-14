@@ -71,6 +71,10 @@ struct CardStacks {
         return CardStacks(cardStacks: [cardStacks[cardStacks.index(firstColumn, offsetBy: cardStacks.count-firstColumn-1)]])
     }
     
+    func getCardStacksOne(column: Int) -> CardStacks {
+        return CardStacks(cardStacks: [cardStacks[column]])
+    }
+    
     func blankIndexAtCardStack() -> Int? {
         for (index, cardStack) in cardStacks.enumerated() {
             if cardStack.getLastCard() == nil {
@@ -79,5 +83,9 @@ struct CardStacks {
         }
         
         return nil
+    }
+    
+    func isMovableCard(column: Int, row: Int) -> Bool {
+        return cardStacks[column].isMovableCard(row: row)
     }
 }

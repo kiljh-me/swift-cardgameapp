@@ -9,8 +9,10 @@
 import UIKit
 
 protocol CardStackDelegate {
-    func doubleTapCard(_ column: Int, _ row: Int)
-    func moveToPoint(_ column: Int, _ row: Int)
+    func doubleTapCard(column: Int, row: Int)
+    func moveToPoint(column: Int, row: Int)
+    func moveToStack(column: Int, row: Int, toColumn: Int) -> Bool
+    func isMovableCard(column: Int, row: Int) -> Bool
 }
 
 class CardStackView: UIView {
@@ -71,7 +73,7 @@ class CardStackView: UIView {
         }
         
         if row >= 0 && column >= 0 {
-            delegate?.doubleTapCard(column, row)
+            delegate?.doubleTapCard(column: column, row: row)
         }
     }
     
@@ -109,27 +111,53 @@ class CardStackView: UIView {
     @objc func draggingView(_ sender: UIPanGestureRecognizer) {
         let point = sender.location(in: self)
         let draggedView = sender.view!
+        var row = -1
+        var column = -1
         
         if sender.state == .began {
            originCenter = draggedView.center
         }
         
-        draggedView.center = point
+        for (i, stack) in stackView.enumerated() {
+            if let j = stack.firstIndex(of: draggedView as! UIImageView) {
+                column = i
+                row = j
+            }
+        }
         
-        if sender.state == .ended {
-            if point.y <= 0 {
-                var row = -1
-                var column = -1
-                
-                for (i, stack) in stackView.enumerated() {
-                    if let j = stack.firstIndex(of: draggedView as! UIImageView) {
-                        column = i
-                        row = j
+        if delegate?.isMovableCard(column: column, row: row) ?? false {
+            for index in row...stackView[column].count-1 {
+                stackView[column][index].center = CGPoint(x: point.x, y: point.y+CGFloat(20*(index-row)))
+            }
+            
+            if sender.state == .ended {
+                if point.y <= 0 {
+                    delegate?.moveToPoint(column: column, row: row)
+                } else {
+                    let toColumn: Int
+                    switch point.x {
+                    case 0 ... 20 + 55 * 1:
+                        toColumn = 0
+                    case 0 ... 20 + 55 * 2:
+                        toColumn = 1
+                    case 0 ... 20 + 55 * 3:
+                        toColumn = 2
+                    case 0 ... 20 + 55 * 4:
+                        toColumn = 3
+                    case 0 ... 20 + 55 * 5:
+                        toColumn = 4
+                    case 0 ... 20 + 55 * 6:
+                        toColumn = 5
+                    case 0 ... 20 + 55 * 7:
+                        toColumn = 6
+                    default:
+                        toColumn = 7
+                    }
+                    
+                    if !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! {
+                        draggedView.center = originCenter ?? CGPoint(x: 0, y: 0)
                     }
                 }
-                delegate?.moveToPoint(column, row)
-            } else {
-                draggedView.center = originCenter ?? CGPoint(x: 0, y: 0)
             }
         }
     }
