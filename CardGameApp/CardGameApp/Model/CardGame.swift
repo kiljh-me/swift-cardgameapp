@@ -22,7 +22,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     
     /// 게임 시작
     func start() {
-        cardStacks.start(cardDeck)
+        cardStacks.start(cardDeck, count: 7)
     }
     
     func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {

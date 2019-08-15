@@ -19,8 +19,8 @@ struct CardStacks {
         self.cardStacks = cardStacks
     }
     
-    mutating func start(_ cardDeck: CardDeck) {
-        for index in 1...7 {
+    mutating func start(_ cardDeck: CardDeck, count: Int) {
+        for index in 1...count {
             cardStacks.append(CardStack(layer: index, cardDeck: cardDeck))
         }
     }
