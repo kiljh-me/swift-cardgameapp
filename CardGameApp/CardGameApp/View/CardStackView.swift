@@ -96,14 +96,14 @@ class CardStackView: UIView {
         showCard(cardStack, column, row)
     }
     
-    func animateToStack(_ cardStack: ShowableToCardStack,_ column: Int, _ row: Int, _ moveColumn: Int) {
-        let moveRow = stackView[moveColumn].count
+    func animateToStack(_ cardStack: ShowableToCardStack,_ column: Int, _ row: Int, _ toColumn: Int) {
+        let toRow = stackView[toColumn].count
         
         UIImageView.animate(withDuration: 0.15, animations: {
-            self.stackView[column][row].frame = CGRect(x: 20 + 55 * moveColumn, y: 20 * moveRow, width: 50, height: 63)
+            self.stackView[column][row].frame = CGRect(x: 20 + 55 * toColumn, y: 20 * toRow, width: 50, height: 63)
         })
             
-        self.showCard(cardStack, moveColumn, moveRow)
+        self.showCard(cardStack, toColumn, toRow)
         self.stackView[column][row].removeFromSuperview()
         self.stackView[column].remove(at: row)
     }
@@ -155,7 +155,9 @@ class CardStackView: UIView {
                     }
                     
                     if !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! {
-                        draggedView.center = originCenter ?? CGPoint(x: 0, y: 0)
+                        for index in row...stackView[column].count-1 {
+                            stackView[column][index].center = CGPoint(x: originCenter?.x ?? 0, y: (originCenter?.y ?? 0)+CGFloat(20*(index-row)))
+                        }
                     }
                 }
             }
