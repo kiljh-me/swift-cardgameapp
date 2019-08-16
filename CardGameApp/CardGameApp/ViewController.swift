@@ -96,7 +96,7 @@ class ViewController: UIViewController, CardStackDelegate {
         cardStackView.stackView[blankIndex].append(kView)
     }
     
-    func moveToPoint(column: Int, row: Int) {
+    func moveToPoint(column: Int, row: Int) -> Bool {
         let index = cardGame.movePointStack(column: column, row: row)
 
         if let index = index, let view = cardStackView.animateToPoint(column: column, row: row, pointIndex: index) {
@@ -107,7 +107,11 @@ class ViewController: UIViewController, CardStackDelegate {
             cardStackView.refreshCardStackColumn(column)
             
             checkWin()
+            
+            return true
         }
+        
+        return false
     }
     
     func moveToStack(column: Int, row: Int, toColumn: Int) -> Bool {

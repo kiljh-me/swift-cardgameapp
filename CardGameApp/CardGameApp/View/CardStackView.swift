@@ -10,7 +10,7 @@ import UIKit
 
 protocol CardStackDelegate {
     func doubleTapCard(column: Int, row: Int)
-    func moveToPoint(column: Int, row: Int)
+    func moveToPoint(column: Int, row: Int) -> Bool
     func moveToStack(column: Int, row: Int, toColumn: Int) -> Bool
     func isMovableCard(column: Int, row: Int) -> Bool
 }
@@ -117,18 +117,22 @@ class CardStackView: UIView {
         
         if sender.state == .ended {
             if point.y <= 0 {
-                delegate?.moveToPoint(column: column, row: row)
-                return
-            }
-            
-            let toColumn = Int((point.x - 20) / 55)
-            
-            guard !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! else {
-                return
+                let success = delegate?.moveToPoint(column: column, row: row) ?? false
+                
+                if success {
+                    return
+                }
+            } else {
+                let toColumn = Int((point.x - 20) / 55)
+                
+                guard !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! else {
+                    return
+                }
+                
+                refreshCardStackColumn(toColumn)
             }
             
             refreshCardStackColumn(column)
-            refreshCardStackColumn(toColumn)
         }
     }
     
