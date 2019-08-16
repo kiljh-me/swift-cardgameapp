@@ -115,27 +115,29 @@ class CardStackView: UIView {
             stackView[column][index].center = CGPoint(x: point.x, y: point.y+CGFloat(20*(index-row)))
         }
         
-        if sender.state == .ended {
-            if point.y <= 0 {
-                let success = delegate?.moveToPoint(column: column, row: row) ?? false
-                
-                if success {
-                    return
-                }
-            } else {
-                var toColumn = Int((point.x - 20) / 55)
-                
-                if toColumn > 6 {
-                    toColumn = 6
-                }
-                
-                guard !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! else {
-                    return
-                }
-                
-                refreshCardStack(column: toColumn)
+        
+        guard sender.state == .ended else {
+            return
+        }
+        
+        if point.y <= 0 {
+            let success = delegate?.moveToPoint(column: column, row: row) ?? false
+            
+            if !success {
+                refreshCardStack(column: column)
             }
             
+            return
+        }
+        
+        var toColumn = Int((point.x - 20) / 55)
+        
+        if toColumn > 6 {
+            toColumn = 6
+        }
+        
+        if !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! {
+            refreshCardStack(column: toColumn)
             refreshCardStack(column: column)
         }
     }
