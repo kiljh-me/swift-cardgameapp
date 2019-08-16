@@ -73,7 +73,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
             return nil
         }
         
-        if let index = card.isCardStack(cardStacks) {
+        if let index = cardStacks.isMoveableToStack(card: card) {
             cardStacks.appendToLast(column: index, card)
             cardDeck.removeOpenCard()
             
@@ -127,13 +127,13 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
             return (toColumn: nil, movingCardCount: 0)
         }
         
-        if var index = card.isCardStack(cardStacksPart), index >= 0 {
+        if var index = cardStacksPart.isMoveableToStack(card: card), index >= 0 {
             index += column
             
             let count = getMovingCardCount(column: column, row: row, toColumn: index)
             
             return (toColumn: index, movingCardCount: count)
-        } else if let index = card.isCardStack(cardStacks), index >= 0 {
+        } else if let index = cardStacks.isMoveableToStack(card: card), index >= 0 {
             let count = getMovingCardCount(column: column, row: row, toColumn: index)
             
             return (toColumn: index, movingCardCount: count)
@@ -149,7 +149,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
             return (toColumn: nil, movingCardCount: 0)
         }
         
-        if let index = card.isCardStack(cardStacksPart), index >= 0 {
+        if let index = cardStacksPart.isMoveableToStack(card: card), index >= 0 {
             let count = getMovingCardCount(column: column, row: row, toColumn: toColumn)
             
             return (toColumn: toColumn, movingCardCount: count)

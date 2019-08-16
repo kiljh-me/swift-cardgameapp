@@ -131,9 +131,9 @@ class Card: ShowableToImage {
         return suit == card.suit
     }
     
-    func isCardStack(_ cardStacks: CardStacks) -> Int? {
-        return cardStacks.isMoveableToStack(card: self)
-    }
+//    func isCardStack(_ cardStacks: CardStacks) -> Int? {
+//        return cardStacks.isMoveableToStack(card: self)
+//    }
     
     func isK() -> Bool {
         return rank == Rank.king
