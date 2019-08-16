@@ -10,12 +10,12 @@ import Foundation
 
 protocol ShowableToCardStack {
     func getCardStackRow(column: Int) -> Int
-    func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ())
+    func showToCardStack(column: Int, row: Int, handler: (String) -> ())
 }
 
 protocol ShowableToCards {
     func getCardsCount() -> Int
-    func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ())
+    func showToCardStack(column: Int, row: Int, handler: (String) -> ())
 }
 
 protocol ShowableToImage {
@@ -23,5 +23,5 @@ protocol ShowableToImage {
 }
 
 protocol MoveableToStack {
-    func getMovePosition(_ column: Int, _ row: Int)
+    func getMovePosition(column: Int, row: Int)
 }

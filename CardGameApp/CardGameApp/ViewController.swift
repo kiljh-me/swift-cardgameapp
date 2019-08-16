@@ -97,9 +97,9 @@ class ViewController: UIViewController, CardStackDelegate {
     }
     
     func moveToPoint(column: Int, row: Int) {
-        let index = cardGame.movePointStack(column, row)
+        let index = cardGame.movePointStack(column: column, row: row)
 
-        if let index = index, let view = cardStackView.animateToPoint(column, row, index) {
+        if let index = index, let view = cardStackView.animateToPoint(column: column, row: row, pointIndex: index) {
             view.frame = CGRect(x: 20 + 55 * index, y: 20, width: 50, height: 63)
             cardDeckView.addSubview(view)
 
@@ -116,7 +116,7 @@ class ViewController: UIViewController, CardStackDelegate {
         if let toColumn = moveInfo.0 {
             for _ in 0..<moveInfo.1
             {
-                cardStackView.animateToStack(column, row, toColumn)
+                cardStackView.animateToStack(column: column, row: row, toColumn: toColumn)
             }
             
             cardGame.openLastCard(column)
@@ -128,10 +128,10 @@ class ViewController: UIViewController, CardStackDelegate {
         }
         
         if cardGame.isMovableK(column: column, row: row, toColumn: toColumn) {
-            let (toCloumn, moveCardCount) = cardGame.kCardMoveStackToStack(column, row)
+            let (toCloumn, moveCardCount) = cardGame.kCardMoveStackToStack(column: column, row: row)
             if let toCloumn = toCloumn {
                 for _ in 0..<moveCardCount {
-                    cardStackView.animateToStack(column, row, toCloumn)
+                    cardStackView.animateToStack(column: column, row: row, toColumn: toCloumn)
                 }
                 
                 cardGame.openLastCard(column)
@@ -146,9 +146,9 @@ class ViewController: UIViewController, CardStackDelegate {
     }
     
     func doubleTapCard(column: Int, row: Int) {
-        let index = cardGame.movePointStack(column, row)
+        let index = cardGame.movePointStack(column: column, row: row)
         
-        if let index = index, let view = cardStackView.animateToPoint(column, row, index) {
+        if let index = index, let view = cardStackView.animateToPoint(column: column, row: row, pointIndex: index) {
             view.frame = CGRect(x: 20 + 55 * index, y: 20, width: 50, height: 63)
             
             cardDeckView.addSubview(view)
@@ -161,11 +161,11 @@ class ViewController: UIViewController, CardStackDelegate {
             return
         }
         
-        let (toColumn, moveCardCount) = cardGame.getMoveStack(column, row)
+        let (toColumn, moveCardCount) = cardGame.getMoveStack(column: column, row: row)
         
         if let toColumn = toColumn {
             for _ in 0..<moveCardCount {
-                cardStackView.animateToStack(column, row, toColumn)
+                cardStackView.animateToStack(column: column, row: row, toColumn: toColumn)
             }
             
             cardGame.openLastCard(column)
@@ -175,11 +175,11 @@ class ViewController: UIViewController, CardStackDelegate {
             return
         }
     
-        if cardGame.isK(column, row) {
-            let (toColumn, moveCardCount) = cardGame.kCardMoveStackToStack(column, row)
+        if cardGame.isK(column: column, row: row) {
+            let (toColumn, moveCardCount) = cardGame.kCardMoveStackToStack(column: column, row: row)
             if let toColumn = toColumn {
                 for _ in 0..<moveCardCount {
-                    cardStackView.animateToStack(column, row, toColumn)
+                    cardStackView.animateToStack(column: column, row: row, toColumn: toColumn)
                 }
                 
                 cardGame.openLastCard(column)

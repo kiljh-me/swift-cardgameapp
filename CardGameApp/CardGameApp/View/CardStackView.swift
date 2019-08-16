@@ -47,12 +47,12 @@ class CardStackView: UIView {
         }
         
         for row in 0..<maxRow {
-            showCard(column, row)
+            showCard(column: column, row: row)
         }
     }
 
-    func showCard(_ column: Int, _ row: Int) {
-        cardStack?.showToCardStack(column, row, handler: { (cardImageName) in
+    func showCard(column: Int, row: Int) {
+        cardStack?.showToCardStack(column: column, row: row, handler: { (cardImageName) in
             let coordinateX = 20 + 55 * column
             let coordinateY = 20 * row
         
@@ -90,7 +90,7 @@ class CardStackView: UIView {
         }
     }
     
-    func animateToPoint(_ column: Int, _ row: Int, _ pointIndex: Int) -> UIImageView? {
+    func animateToPoint(column: Int, row: Int, pointIndex: Int) -> UIImageView? {
         var view: UIImageView?
         
         UIView.animate(withDuration: 0.15, animations: {
@@ -103,12 +103,7 @@ class CardStackView: UIView {
         return view
     }
     
-    func openLastCard(_ column: Int, _ row: Int) {
-        stackView[column].remove(at: row)
-        showCard(column, row)
-    }
-    
-    func animateToStack(_ column: Int, _ row: Int, _ toColumn: Int) {
+    func animateToStack(column: Int, row: Int, toColumn: Int) {
         let toRow = stackView[toColumn].count
         
         UIImageView.animate(withDuration: 0.15, animations: {

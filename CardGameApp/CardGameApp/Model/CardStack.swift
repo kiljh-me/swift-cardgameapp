@@ -26,7 +26,7 @@ struct CardStack: ShowableToCards {
         cards.last?.open()
     }
     
-    func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
+    func showToCardStack(column: Int, row: Int, handler: (String) -> ()) {
         cards[row].showToImage(handler: handler)
     }
     

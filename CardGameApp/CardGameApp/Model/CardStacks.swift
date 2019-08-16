@@ -25,15 +25,15 @@ struct CardStacks {
         }
     }
     
-    func showToCardStack(_ column: Int, _ row: Int, handler: (String) -> ()) {
-        cardStacks[column].showToCardStack(column, row, handler: handler)
+    func showToCardStack(column: Int, row: Int, handler: (String) -> ()) {
+        cardStacks[column].showToCardStack(column: column, row: row, handler: handler)
     }
     
-    func getCardStackRow(_ column: Int) -> Int {
+    func getCardStackRow(column: Int) -> Int {
         return cardStacks[column].getCardsCount()
     }
     
-    func isMoveableToStack(_ card: Card) -> Int? {
+    func isMoveableToStack(card: Card) -> Int? {
         for (index, stack) in cardStacks.enumerated() {
             if (stack.getLastCard() ?? card).isNextStackThan(card) {
                 return index
