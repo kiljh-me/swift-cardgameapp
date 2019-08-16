@@ -72,6 +72,7 @@ class ViewController: UIViewController, CardStackDelegate {
                 })
                 
                 self.cardDeckView.openCards.removeLast()
+                checkWin()
             } else {
                 break
             }
@@ -104,6 +105,8 @@ class ViewController: UIViewController, CardStackDelegate {
 
             cardGame.openLastCard(column)
             cardStackView.refreshCardStackColumn(column: column)
+            
+            checkWin()
         }
     }
     
@@ -153,6 +156,8 @@ class ViewController: UIViewController, CardStackDelegate {
             cardGame.openLastCard(column)
             cardStackView.refreshCardStackColumn(column: column)
             
+            checkWin()
+            
             return
         }
         
@@ -186,5 +191,19 @@ class ViewController: UIViewController, CardStackDelegate {
     
     func isMovableCard(column: Int, row: Int) -> Bool {
         return cardGame.isMovableCard(column: column, row: row)
+    }
+    
+    private func checkWin() {
+        let cardExistArrayCount = cardStackView.stackView.map { (viewArray) -> Int in
+            return viewArray.count
+            }.filter { (count) -> Bool in
+                return count > 0
+            }.count
+        if cardExistArrayCount == 0 {
+            let alert = UIAlertController(title: "성공", message: "게임을 승리하셨습니다.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "닫기", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
