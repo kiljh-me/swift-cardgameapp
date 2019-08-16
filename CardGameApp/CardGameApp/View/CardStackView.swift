@@ -18,7 +18,6 @@ protocol CardStackDelegate {
 class CardStackView: UIView {
     var stackView = Array(repeating: [UIImageView](), count: 7)
     var delegate: CardStackDelegate?
-    var originCenter: CGPoint?
     var cardStack: ShowableToCardStack?
     
     func removeSubViews() {
@@ -75,17 +74,8 @@ class CardStackView: UIView {
     }
     
     @objc func handleTapGesture(recognizer: UITapGestureRecognizer) {
-        var row = -1
-        var column = -1
-        
-        for (i, stack) in stackView.enumerated() {
-            if let j = stack.firstIndex(of: recognizer.view as! UIImageView) {
-                column = i
-                row = j
-            }
-        }
-        
-        if row >= 0 && column >= 0 {
+        if let view = recognizer.view {
+            let (column, row) = getCoordinateView(view)
             delegate?.doubleTapCard(column: column, row: row)
         }
     }
@@ -114,54 +104,45 @@ class CardStackView: UIView {
     @objc func draggingView(_ sender: UIPanGestureRecognizer) {
         let point = sender.location(in: self)
         let draggedView = sender.view!
-        var row = -1
-        var column = -1
         
-        if sender.state == .began {
-           originCenter = draggedView.center
+        let (column, row) = getCoordinateView(draggedView)
+        
+        guard delegate?.isMovableCard(column: column, row: row) ?? false else {
+            return
         }
         
+        for index in row...stackView[column].count-1 {
+            stackView[column][index].center = CGPoint(x: point.x, y: point.y+CGFloat(20*(index-row)))
+        }
+        
+        if sender.state == .ended {
+            if point.y <= 0 {
+                delegate?.moveToPoint(column: column, row: row)
+                return
+            }
+            
+            let toColumn = Int((point.x - 20) / 55)
+            
+            guard !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! else {
+                return
+            }
+            
+            refreshCardStackColumn(column)
+            refreshCardStackColumn(toColumn)
+        }
+    }
+    
+    private func getCoordinateView(_ view: UIView) -> (Int, Int) {
+        var column = 0
+        var row = 0
+        
         for (i, stack) in stackView.enumerated() {
-            if let j = stack.firstIndex(of: draggedView as! UIImageView) {
+            if let j = stack.firstIndex(of: view as! UIImageView) {
                 column = i
                 row = j
             }
         }
         
-        if delegate?.isMovableCard(column: column, row: row) ?? false {
-            for index in row...stackView[column].count-1 {
-                stackView[column][index].center = CGPoint(x: point.x, y: point.y+CGFloat(20*(index-row)))
-            }
-            
-            if sender.state == .ended {
-                if point.y <= 0 {
-                    delegate?.moveToPoint(column: column, row: row)
-                } else {
-                    let toColumn: Int
-                    switch point.x {
-                    case 0 ... 20 + 55 * 1:
-                        toColumn = 0
-                    case 0 ... 20 + 55 * 2:
-                        toColumn = 1
-                    case 0 ... 20 + 55 * 3:
-                        toColumn = 2
-                    case 0 ... 20 + 55 * 4:
-                        toColumn = 3
-                    case 0 ... 20 + 55 * 5:
-                        toColumn = 4
-                    case 0 ... 20 + 55 * 6:
-                        toColumn = 5
-                    default:
-                        toColumn = 6
-                    }
-                    
-                    
-                    if !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! {
-                        refreshCardStackColumn(column)
-                        refreshCardStackColumn(toColumn)
-                    }
-                }
-            }
-        }
+        return (column, row)
     }
 }
