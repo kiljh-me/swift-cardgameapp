@@ -140,11 +140,7 @@ class Card: ShowableToImage {
     }
     
     func isMovableK(_ cardStacks: CardStacks) -> Bool {
-        if cardStacks.blankIndexAtCardStack() == 0 {
-            return true
-        }
-        
-        return false
+        return cardStacks.blankIndexAtCardStack() == 0
     }
 }
 
