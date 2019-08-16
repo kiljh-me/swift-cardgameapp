@@ -31,11 +31,11 @@ class CardStackView: UIView {
     
     func refreshCardStack() {
         for column in 0..<7 {
-            refreshCardStackColumn(column: column)
+            refreshCardStackColumn(column)
         }
     }
     
-    func refreshCardStackColumn(column: Int) {
+    func refreshCardStackColumn(_ column: Int) {
         for view in stackView[column] {
             view.removeFromSuperview()
         }
@@ -157,8 +157,8 @@ class CardStackView: UIView {
                     
                     
                     if !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! {
-                        refreshCardStackColumn(column: column)
-                        refreshCardStackColumn(column: toColumn)
+                        refreshCardStackColumn(column)
+                        refreshCardStackColumn(toColumn)
                     }
                 }
             }

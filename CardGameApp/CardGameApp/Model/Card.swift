@@ -132,7 +132,7 @@ class Card: ShowableToImage {
     }
     
     func isCardStack(_ cardStacks: CardStacks) -> Int? {
-        return cardStacks.isMoveableToStack(self)
+        return cardStacks.isMoveableToStack(card: self)
     }
     
     func isK() -> Bool {

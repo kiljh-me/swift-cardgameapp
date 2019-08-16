@@ -26,11 +26,11 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     }
     
     func showToCardStack(column: Int, row: Int, handler: (String) -> ()) {
-        cardStacks.showToCardStack(column, row, handler: handler)
+        cardStacks.showToCardStack(column: column, row: row, handler: handler)
     }
     
     func getCardStackRow(column: Int) -> Int {
-        return cardStacks.getCardStackRow(column)
+        return cardStacks.getCardStackRow(column: column)
     }
     
     func showToOneCard(handler: (String) -> ()) throws {

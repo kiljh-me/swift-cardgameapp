@@ -104,7 +104,7 @@ class ViewController: UIViewController, CardStackDelegate {
             cardDeckView.addSubview(view)
 
             cardGame.openLastCard(column)
-            cardStackView.refreshCardStackColumn(column: column)
+            cardStackView.refreshCardStackColumn(column)
             
             checkWin()
         }
@@ -121,8 +121,8 @@ class ViewController: UIViewController, CardStackDelegate {
             
             cardGame.openLastCard(column)
 
-            cardStackView.refreshCardStackColumn(column: column)
-            cardStackView.refreshCardStackColumn(column: toColumn)
+            cardStackView.refreshCardStackColumn(column)
+            cardStackView.refreshCardStackColumn(toColumn)
             
             return true
         }
@@ -135,8 +135,8 @@ class ViewController: UIViewController, CardStackDelegate {
                 }
                 
                 cardGame.openLastCard(column)
-                cardStackView.refreshCardStackColumn(column: column)
-                cardStackView.refreshCardStackColumn(column: toColumn)
+                cardStackView.refreshCardStackColumn(column)
+                cardStackView.refreshCardStackColumn(toColumn)
             }
             
             return true
@@ -154,7 +154,7 @@ class ViewController: UIViewController, CardStackDelegate {
             cardDeckView.addSubview(view)
             
             cardGame.openLastCard(column)
-            cardStackView.refreshCardStackColumn(column: column)
+            cardStackView.refreshCardStackColumn(column)
             
             checkWin()
             
@@ -169,8 +169,8 @@ class ViewController: UIViewController, CardStackDelegate {
             }
             
             cardGame.openLastCard(column)
-            cardStackView.refreshCardStackColumn(column: column)
-            cardStackView.refreshCardStackColumn(column: toColumn)
+            cardStackView.refreshCardStackColumn(column)
+            cardStackView.refreshCardStackColumn(toColumn)
         
             return
         }
@@ -183,8 +183,8 @@ class ViewController: UIViewController, CardStackDelegate {
                 }
                 
                 cardGame.openLastCard(column)
-                cardStackView.refreshCardStackColumn(column: column)
-                cardStackView.refreshCardStackColumn(column: toColumn)
+                cardStackView.refreshCardStackColumn(column)
+                cardStackView.refreshCardStackColumn(toColumn)
             }
         }
     }
