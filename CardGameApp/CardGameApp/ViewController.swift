@@ -21,7 +21,7 @@ class ViewController: UIViewController, CardStackDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        cardStackView.cardStack = cardGame
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg_pattern")!)
         self.becomeFirstResponder()
@@ -32,6 +32,7 @@ class ViewController: UIViewController, CardStackDelegate {
         
         cardGamePlay()
         cardStackView.delegate = self
+        
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -59,7 +60,7 @@ class ViewController: UIViewController, CardStackDelegate {
     
     private func cardGamePlay() {
         cardGame.start()
-        cardStackView.showCardStack(cardGame as ShowableToCardStack)
+        cardStackView.refreshCardStack()
         cardDeckView.showCardBack()
     }
     
@@ -102,24 +103,24 @@ class ViewController: UIViewController, CardStackDelegate {
             cardDeckView.addSubview(view)
 
             cardGame.openLastCard(column)
-            if row >= 1 {
-                cardStackView.openLastCard(cardGame, column, row-1)
-            }
+            cardStackView.refreshCardStackColumn(column: column)
         }
     }
     
     func moveToStack(column: Int, row: Int, toColumn: Int) -> Bool {
-        let (toCloumn, moveCardCount) = cardGame.getMoveableToStack(column: column, row: row, toColumn: toColumn)
+        let moveInfo = cardGame.getMoveableToStack(column: column, row: row, toColumn: toColumn)
         
-        if let toCloumn = toCloumn {
-            for _ in 0..<moveCardCount {
-                cardStackView.animateToStack(cardGame, column, row, toCloumn)
+        if let toColumn = moveInfo.0 {
+            for _ in 0..<moveInfo.1
+            {
+                cardStackView.animateToStack(column, row, toColumn)
             }
             
             cardGame.openLastCard(column)
-            if row >= 1 {
-                cardStackView.openLastCard(cardGame, column, row-1)
-            }
+
+            cardStackView.refreshCardStackColumn(column: column)
+            cardStackView.refreshCardStackColumn(column: toColumn)
+            
             return true
         }
         
@@ -127,13 +128,12 @@ class ViewController: UIViewController, CardStackDelegate {
             let (toCloumn, moveCardCount) = cardGame.kCardMoveStackToStack(column, row)
             if let toCloumn = toCloumn {
                 for _ in 0..<moveCardCount {
-                    cardStackView.animateToStack(cardGame, column, row, toCloumn)
+                    cardStackView.animateToStack(column, row, toCloumn)
                 }
                 
                 cardGame.openLastCard(column)
-                if row >= 1 {
-                    cardStackView.openLastCard(cardGame, column, row-1)
-                }
+                cardStackView.refreshCardStackColumn(column: column)
+                cardStackView.refreshCardStackColumn(column: toColumn)
             }
             
             return true
@@ -147,41 +147,39 @@ class ViewController: UIViewController, CardStackDelegate {
         
         if let index = index, let view = cardStackView.animateToPoint(column, row, index) {
             view.frame = CGRect(x: 20 + 55 * index, y: 20, width: 50, height: 63)
+            
             cardDeckView.addSubview(view)
             
             cardGame.openLastCard(column)
-            if row >= 1 {
-                cardStackView.openLastCard(cardGame, column, row-1)
-            }
+            cardStackView.refreshCardStackColumn(column: column)
+            
             return
         }
         
-        let (toCloumn, moveCardCount) = cardGame.getMoveStack(column, row)
+        let (toColumn, moveCardCount) = cardGame.getMoveStack(column, row)
         
-        if let toCloumn = toCloumn {
+        if let toColumn = toColumn {
             for _ in 0..<moveCardCount {
-                cardStackView.animateToStack(cardGame, column, row, toCloumn)
+                cardStackView.animateToStack(column, row, toColumn)
             }
             
             cardGame.openLastCard(column)
-            if row >= 1 {
-                cardStackView.openLastCard(cardGame, column, row-1)
-            }
-            
+            cardStackView.refreshCardStackColumn(column: column)
+            cardStackView.refreshCardStackColumn(column: toColumn)
+        
             return
         }
     
         if cardGame.isK(column, row) {
-            let (toCloumn, moveCardCount) = cardGame.kCardMoveStackToStack(column, row)
-            if let toCloumn = toCloumn {
+            let (toColumn, moveCardCount) = cardGame.kCardMoveStackToStack(column, row)
+            if let toColumn = toColumn {
                 for _ in 0..<moveCardCount {
-                    cardStackView.animateToStack(cardGame, column, row, toCloumn)
+                    cardStackView.animateToStack(column, row, toColumn)
                 }
                 
                 cardGame.openLastCard(column)
-                if row >= 1 {
-                    cardStackView.openLastCard(cardGame, column, row-1)
-                }
+                cardStackView.refreshCardStackColumn(column: column)
+                cardStackView.refreshCardStackColumn(column: toColumn)
             }
         }
     }

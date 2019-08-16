@@ -19,6 +19,7 @@ class CardStackView: UIView {
     var stackView = Array(repeating: [UIImageView](), count: 7)
     var delegate: CardStackDelegate?
     var originCenter: CGPoint?
+    var cardStack: ShowableToCardStack?
     
     func removeSubViews() {
         for view in self.subviews {
@@ -28,18 +29,30 @@ class CardStackView: UIView {
         stackView = Array(repeating: [UIImageView](), count: 7)
     }
     
-    func showCardStack(_ cardStack: ShowableToCardStack) {
+    func refreshCardStack() {
         for column in 0..<7 {
-            let maxRow = cardStack.getCardStackRow(column: column)
-            
-            for row in 0..<maxRow {
-                showCard(cardStack, column, row)
-            }
+            refreshCardStackColumn(column: column)
+        }
+    }
+    
+    func refreshCardStackColumn(column: Int) {
+        for view in stackView[column] {
+            view.removeFromSuperview()
+        }
+        
+        stackView[column].removeAll()
+        
+        guard let maxRow = cardStack?.getCardStackRow(column: column) else {
+            return
+        }
+        
+        for row in 0..<maxRow {
+            showCard(column, row)
         }
     }
 
-    func showCard(_ cardStack: ShowableToCardStack, _ column: Int, _ row: Int) {
-        cardStack.showToCardStack(column, row, handler: { (cardImageName) in
+    func showCard(_ column: Int, _ row: Int) {
+        cardStack?.showToCardStack(column, row, handler: { (cardImageName) in
             let coordinateX = 20 + 55 * column
             let coordinateY = 20 * row
         
@@ -85,27 +98,22 @@ class CardStackView: UIView {
         })
         
         view = self.stackView[column][row]
-        self.stackView[column][row].removeFromSuperview()
-        self.stackView[column].remove(at: row)
-
+        stackView[column].remove(at: row)
+        
         return view
     }
     
-    func openLastCard(_ cardStack: ShowableToCardStack, _ column: Int, _ row: Int) {
+    func openLastCard(_ column: Int, _ row: Int) {
         stackView[column].remove(at: row)
-        showCard(cardStack, column, row)
+        showCard(column, row)
     }
     
-    func animateToStack(_ cardStack: ShowableToCardStack,_ column: Int, _ row: Int, _ toColumn: Int) {
+    func animateToStack(_ column: Int, _ row: Int, _ toColumn: Int) {
         let toRow = stackView[toColumn].count
         
         UIImageView.animate(withDuration: 0.15, animations: {
             self.stackView[column][row].frame = CGRect(x: 20 + 55 * toColumn, y: 20 * toRow, width: 50, height: 63)
         })
-            
-        self.showCard(cardStack, toColumn, toRow)
-        self.stackView[column][row].removeFromSuperview()
-        self.stackView[column].remove(at: row)
     }
     
     @objc func draggingView(_ sender: UIPanGestureRecognizer) {
@@ -148,16 +156,14 @@ class CardStackView: UIView {
                         toColumn = 4
                     case 0 ... 20 + 55 * 6:
                         toColumn = 5
-                    case 0 ... 20 + 55 * 7:
-                        toColumn = 6
                     default:
-                        toColumn = 7
+                        toColumn = 6
                     }
                     
+                    
                     if !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! {
-                        for index in row...stackView[column].count-1 {
-                            stackView[column][index].center = CGPoint(x: originCenter?.x ?? 0, y: (originCenter?.y ?? 0)+CGFloat(20*(index-row)))
-                        }
+                        refreshCardStackColumn(column: column)
+                        refreshCardStackColumn(column: toColumn)
                     }
                 }
             }

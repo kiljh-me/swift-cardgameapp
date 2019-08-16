@@ -117,6 +117,7 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     
     func openLastCard(_ column: Int) {
         cardStacks.openLastCard(column: column)
+        
     }
     
     func getMoveStack(_ column: Int, _ row: Int) -> (Int?, Int) {
