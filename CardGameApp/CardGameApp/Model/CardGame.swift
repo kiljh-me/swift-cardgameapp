@@ -124,38 +124,38 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
         let cardStacksPart = cardStacks.getCardStacksPart(firstColumn: column)
         
         guard let card = cardStacks.getIndexCard(column: column, row: row) else {
-            return (nil, 0)
+            return (toColumn: nil, movingCardCount: 0)
         }
         
         if var index = card.isCardStack(cardStacksPart), index >= 0 {
             index += column
             
-            let count = moveCards(column: column, row: row, toColumn: index)
+            let count = getMovingCardCount(column: column, row: row, toColumn: index)
             
-            return (index, count)
+            return (toColumn: index, movingCardCount: count)
         } else if let index = card.isCardStack(cardStacks), index >= 0 {
-            let count = moveCards(column: column, row: row, toColumn: index)
+            let count = getMovingCardCount(column: column, row: row, toColumn: index)
             
-            return (index, count)
+            return (toColumn: index, movingCardCount: count)
         }
         
-        return (nil, 0)
+        return (toColumn: nil, movingCardCount: 0)
     }
     
     func getMoveableToStack(column: Int, row: Int, toColumn: Int) -> (Int?, Int) {
         let cardStacksPart = cardStacks.getCardStacksOne(column: toColumn)
         
         guard let card = cardStacks.getIndexCard(column: column, row: row) else {
-            return (nil, 0)
+            return (toColumn: nil, movingCardCount: 0)
         }
         
-        if var index = card.isCardStack(cardStacksPart), index >= 0 {
-            let count = moveCards(column: column, row: row, toColumn: toColumn)
+        if let index = card.isCardStack(cardStacksPart), index >= 0 {
+            let count = getMovingCardCount(column: column, row: row, toColumn: toColumn)
             
-            return (toColumn, count)
+            return (toColumn: toColumn, movingCardCount: count)
         }
         
-        return (nil, 0)
+        return (toColumn: nil, movingCardCount: 0)
     }
     
     func moveableK() -> Int? {
@@ -201,16 +201,16 @@ class CardGame: ShowableToCardStack, ShowableToCardDeck {
     }
     
     func kCardMoveStackToStack(column: Int, row: Int) -> (Int?, Int) {
-        guard let arrivingColumn = blankIndexAtCardStack() else {
-            return (nil, 0)
+        guard let toColumn = blankIndexAtCardStack() else {
+            return (toColumn: nil, movingCardCount: 0)
         }
         
-        let count = moveCards(column: column, row: row, toColumn: arrivingColumn)
+        let count = getMovingCardCount(column: column, row: row, toColumn: toColumn)
         
-        return (arrivingColumn, count)
+        return (toColumn: toColumn, movingCardCount: count)
     }
     
-    func moveCards(column: Int, row: Int, toColumn: Int) -> Int {
+    func getMovingCardCount(column: Int, row: Int, toColumn: Int) -> Int {
         var count = 0
         
         while cardStacks.getCardsCount(column: column) > row {
