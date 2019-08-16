@@ -123,7 +123,11 @@ class CardStackView: UIView {
                     return
                 }
             } else {
-                let toColumn = Int((point.x - 20) / 55)
+                var toColumn = Int((point.x - 20) / 55)
+                
+                if toColumn > 6 {
+                    toColumn = 6
+                }
                 
                 guard !(delegate?.moveToStack(column: column, row: row, toColumn: toColumn))! else {
                     return
